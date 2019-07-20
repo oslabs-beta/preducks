@@ -1,0 +1,154 @@
+{
+  "name": "preducks",
+  "version": "1.0.0",
+  "description": "prototyping tool for react + redux + typescript applications",
+  "main": "main.js",
+  "contributors": [
+    "jacob richards",
+    "max gonzalez",
+    "will napier"
+  ],
+  "engines": {
+    "node": "12.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oslabs-beta/preducks"
+  },
+  "build": {
+    "appId": "com.team-preducks.preducks",
+    "copyright": "Copyright © 2019",
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "maintainer": "sjaco"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": "dmg"
+    },
+    "nsis": {
+      "createStartMenuShortcut": true,
+      "createDesktopShortcut": true,
+      "runAfterFinish": true
+    },
+    "win": {
+      "target": "nsis-web"
+    },
+    "files": [
+      "main.js",
+      "build"
+    ],
+    "productName": "",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "prestart": "cross-env NODE_ENV=production webpack --config webpack.config.production.js",
+    "start": "cross-env NODE_ENV=production electron .",
+    "dev": "cross-env NODE_ENV=development webpack --config webpack.config.development.js & cross-env NODE_ENV=development electron .",
+    "electron": "cross-env NODE_ENV=development electron .",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.production.js",
+    "build-bin": "electron-builder -mwl",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+    "linter": "eslint src",
+    "develop": "concurrently \"yarn run dev\" \"yarn run electron\""
+  },
+  "bin": {
+    "preducks": "./index.js"
+  },
+  "preferGlobal": true,
+  "license": "MIT",
+  "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^2.0.0",
+    "@types/react": "^16.8.14",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-redux": "^7.0.8",
+    "acorn": "^6.0.5",
+    "autoprefixer": "^9.0.1",
+    "babel-jest": "^24.8.0",
+    "babel-polyfill": "^6.26.0",
+    "classnames": "^2.2.6",
+    "cli-spinner": "^0.2.8",
+    "commander": "^2.17.1",
+    "d3": "^5.9.2",
+    "electron": "^5.0.6",
+    "electron-reload": "^1.4.1",
+    "fetch-mock": "^7.3.6",
+    "localforage": "^1.7.2",
+    "lodash.throttle": "^4.1.1",
+    "prettier": "^1.18.2",
+    "prop-types": "^15.6.2",
+    "puppeteer-core": "^1.18.1",
+    "react": "^16.8.6",
+    "react-d3-tree": "^1.12.3",
+    "react-dom": "^16.8.6",
+    "react-draggable": "^3.0.5",
+    "react-redux": "^7.1.0",
+    "react-sortable-tree": "^2.2.0",
+    "react-syntax-highlighter": "^11.0.1",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "webpack": "^4.35.2"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/enzyme": "^3.10.2",
+    "@types/jest": "^24.0.15",
+    "@typescript-eslint/parser": "^1.11.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
+    "cross-env": "^5.2.0",
+    "css-loader": "^0.28.11",
+    "electron-builder": "^20.28.1",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-installer-dmg": "^2.0.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.21.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-webpack-plugin": "^3.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.6.0",
+    "node-sass": "^4.12.0",
+    "postcss-loader": "^2.1.6",
+    "redux-mock-store": "^1.5.3",
+    "sass-loader": "^7.0.3",
+    "spectron": "^7.0.0",
+    "style-loader": "^0.20.3",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.4",
+    "webpack-cli": "^3.3.5"
+  }
+}

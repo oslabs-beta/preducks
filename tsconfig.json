@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "./build/",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "target": "es6",
+    "jsx": "react",
+    "lib": ["es6", "dom", "es2017"],
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "baseUrl": "./src"
+  },
+  "include": [
+    "./src/**/*",
+    "__tests__/reducer.test.js",
+    "__tests__/puppeteer.test.js"
+  ]
+}

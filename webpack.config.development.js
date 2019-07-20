@@ -3,7 +3,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const BUILD_DIR = path.join(__dirname, 'build');
 const SRC_DIR = path.join(__dirname, 'src');
@@ -41,25 +40,12 @@ module.exports = {
       {
         test: /\.(s?css)$/,
         use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
           use: [
             {
               loader: 'css-loader',
               options: {
                 camelCase: true,
                 sourceMap: true,
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                config: {
-                  ctx: {
-                    autoprefixer: {
-                      browsers: 'last 2 versions',
-                    },
-                  },
-                },
               },
             },
           ],
@@ -78,14 +64,6 @@ module.exports = {
       filename: 'styles/style.css',
       allChunks: true,
     }),
-    new CopyWebpackPlugin([
-      {
-        from: 'public/images/**/*',
-        to: 'images/',
-        flatten: true,
-        force: true,
-      },
-    ]),
   ],
   watch: true,
 };

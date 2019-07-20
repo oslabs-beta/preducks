@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-// import { format } from 'prettier-standalone';
+import { format } from 'prettier/standalone';
+import parserTypescript from 'prettier/parser-typescript';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { rainbow as style } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import componentRender from '../utils/componentRender.util';
 import { ComponentInt, ComponentsInt } from '../utils/Interfaces';
 
-const format = prettier.format;
+console.log(parserTypescript);
+// const format = prettier.format;
 type Props = {
   focusComponent: ComponentInt;
   components: ComponentsInt;
@@ -30,7 +32,7 @@ class CodePreview extends Component<Props> {
         <SyntaxHighlighter style={style} customStyle={{ background: 'transparent' }}>
           {format(componentRender(focusComponent, components), {
             parser: 'typescript',
-            plugins: prettierPlugins,
+            plugins: [parserTypescript],
           })}
         </SyntaxHighlighter>
       </div>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { format } from 'prettier-standalone';
+// import { format } from 'prettier-standalone';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { rainbow as style } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import componentRender from '../utils/componentRender.util';
 import { ComponentInt, ComponentsInt } from '../utils/Interfaces';
 
+const format = prettier.format;
 type Props = {
   focusComponent: ComponentInt;
   components: ComponentsInt;
@@ -27,9 +28,10 @@ class CodePreview extends Component<Props> {
           margin: '20px',
         }}>
         <SyntaxHighlighter style={style} customStyle={{ background: 'transparent' }}>
-          {'abc'/* {format(componentRender(focusComponent, components), {
+          {format(componentRender(focusComponent, components), {
             parser: 'typescript',
-          })} */}
+            plugins: prettierPlugins,
+          })}
         </SyntaxHighlighter>
       </div>
     );

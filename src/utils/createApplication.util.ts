@@ -1,4 +1,4 @@
-import { format } from 'prettier-standalone';
+// import { format } from 'prettier-standalone';
 import { createReduxFiles } from './createReduxFiles.util';
 import { StoreConfigInterface, ReducersInterface } from './Interfaces';
 

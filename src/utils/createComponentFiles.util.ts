@@ -1,5 +1,5 @@
 // import fs from 'fs';
-import { format } from 'prettier-standalone';
+// import { format } from 'prettier-standalone';
 import componentRender from './componentRender.util';
 
 const createComponentFiles = (

@@ -9,6 +9,11 @@ const BUILD_DIR = path.join(__dirname, 'build');
 const SRC_DIR = path.join(__dirname, 'src');
 
 module.exports = {
+  devServer: {
+    contentBase: BUILD_DIR,
+    hot: true,
+    compress: true,
+  },
   entry: ['babel-polyfill', './index.js'],
   mode: 'development',
   node: {
@@ -17,6 +22,7 @@ module.exports = {
   output: {
     path: BUILD_DIR,
     filename: 'js/bundle.js',
+    pathinfo: false,
   },
   context: SRC_DIR,
   devtool: 'eval-source-map',
@@ -25,8 +31,8 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.tsx?$/, exclude: /node-modules/, loader: 'babel-loader' },
-      { test: /\.ts?$/, exclude: /node-modules/, loader: 'babel-loader' },
+      { test: /\.ts$/, exclude: /node-modules/, loader: 'babel-loader' },
+      { test: /\.tsx$/, exclude: /node-modules/, loader: 'babel-loader' },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -56,9 +62,6 @@ module.exports = {
                 },
               },
             },
-            {
-              loader: 'sass-loader',
-            },
           ],
         }),
       },
@@ -84,11 +87,5 @@ module.exports = {
       },
     ]),
   ],
-  devServer: {
-    contentBase: BUILD_DIR,
-    hot: true,
-    compress: true,
-    port: 9000,
-  },
   watch: true,
 };

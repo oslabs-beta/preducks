@@ -1,4 +1,4 @@
-import { format } from 'prettier-standalone';
+// import { format } from 'prettier-standalone';
 import { number } from 'prop-types';
 import { createCipher } from 'crypto';
 import { StoreConfigInterface } from './Interfaces';

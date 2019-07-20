@@ -1,4 +1,5 @@
 import { ComponentState } from 'react';
+import JSZip from 'jszip';
 import {
   ComponentInt,
   ComponentsInt,
@@ -50,6 +51,8 @@ import {
 import { loadState } from '../localStorage';
 import createComponentFiles from '../utils/createComponentFiles.util';
 import createApplicationUtil from '../utils/createApplication.util';
+
+const zip = new JSZip();
 
 export const loadInitData = () => (dispatch: any) => {
   loadState().then((data: any) => dispatch({
@@ -216,7 +219,7 @@ storeConfig: StoreConfigInterface;
       path,
       appName,
       genOption,
-      storeConfig,
+      storeConfig
     })
       .then(() => {
         dispatch({

@@ -28,7 +28,6 @@ const createComponentFiles = (
   const promises: Array<any> = [];
   components.forEach((component: any) => {
     const newPromise = new Promise((resolve, reject) => {
-      console.log('about to write file ', `${dir}/${component.title}.tsx`);
       fs.writeFile(
         `${dir}/${component.title}.tsx`,
         format(componentRender(component, components), {

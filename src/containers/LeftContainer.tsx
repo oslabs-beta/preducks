@@ -341,8 +341,8 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
           {addComponent}
           <div className="expansionPanel">{leftColExpansionPanels}</div>
         <HTMLComponentPanel
-            focusComponent={focusComponent}
             addChild={addChild}
+            focusComponent={focusComponent}
             />
         {clearAndExportButtons}
         {modal}

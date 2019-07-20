@@ -9,8 +9,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { deleteChild, changeFocusChild } from '../actions/components';
 import { StoreInterface } from '../utils/Interfaces';
 
-export const HtmlChild: React.FC = (props: any): JSX.Element => {
-  const { classes, childId } = props;
+const HtmlChild: React.FC = (props: any): JSX.Element => {
+  const { classes, childId, color } = props;
   const dispatch = useDispatch();
   const focusChildId = useSelector((store: StoreInterface) => store.workspace.focusChild).childId;
   const deleteButton = (
@@ -24,40 +24,31 @@ export const HtmlChild: React.FC = (props: any): JSX.Element => {
         className={classes.margin}
         onClick={() => {
           dispatch(deleteChild(childId));
-        }}
-        style={{
-          color: 'white',
-          marginBottom: '10px',
-          marginTop: '0px',
         }}>
         <DeleteIcon style={{ color: 'white' }} />
       </Button>
     </Fragment>
   );
-  const compStyle = childId === focusChildId
-    ? {
-      borderRadius: '10px',
-      border: '1px solid white',
-      color: 'black',
-      fontWeight: 600,
-      background: 'white',
-      width: '80px',
-    }
-    : {
-      borderRadius: '10px',
-      border: '1px solid white',
-      color: '#FFFFFF',
-      width: '80px',
-    };
+  // const compStyle = childId === focusChildId
+  //   ? {
+  //     borderRadius: '10px',
+  //     border: '1px solid white',
+  //     color: 'black',
+  //     fontWeight: 600,
+  //     background: 'white',
+  //   }
+  //   : {
+  //     borderRadius: '10px',
+  //     border: '1px solid white',
+  //     color: '#FFFFFF',
+  //   };
 
   return (
-    <ListItem button onClick={() => dispatch(changeFocusChild({ childId }))}>
-      <div style={compStyle}>
-        <ListItemText
-          disableTypography
-          className={classes.light}
-          primary={<Typography>{props.componentName.toLowerCase()}</Typography>}
-        />
+    <ListItem button onClick={() => dispatch(changeFocusChild({ childId }))} className="node-html-child">
+      <div
+        style={{ color: (childId === focusChildId) ? color : '' }}
+        className={(childId === focusChildId) ? 'focused' : ''}>
+        {props.componentName.toLowerCase()}
       </div>
       {deleteButton}
     </ListItem>

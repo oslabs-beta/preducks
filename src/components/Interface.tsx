@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { TextField, IconButton, Icon } from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox';
 import TypeSelect from './TypeSelect';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import validateInput from '../utils/validateInput.util';
 import ErrorMessage from './ErrorMessage';
 import StoreItemHeader from './StoreItemHeader';
@@ -15,6 +17,7 @@ const Interface = (props: any) => {
   } = props;
   const [newPropertyName, setNewPropertyName] = useState('');
   const [newPropertyType, setNewPropertyType] = useState('');
+  const [newPropertyIsArray, setNewPropertyIsArray] = useState(false);
   const [newPropertyValidation, setNewPropertyValidation] = useState(validateInput(''));
   const [isVisible, setVisibility] = useState(false);
 
@@ -32,6 +35,7 @@ const Interface = (props: any) => {
       setInterface({ [thisInterface]: updatedInterface });
       setNewPropertyName('');
       setNewPropertyType('');
+      setNewPropertyIsArray(false);
       setVisibility(false);
     } else {
       setVisibility(true);
@@ -90,6 +94,30 @@ const Interface = (props: any) => {
           interfaces={interfaces}
           value={newPropertyType}
           handleChange={(event: Event) => { setNewPropertyType(event.target.value) }}
+        />
+        <FormControlLabel
+          value="top"
+          control={<Checkbox 
+            color="primary" 
+            value={newPropertyIsArray}
+            onChange={() => {
+              if (newPropertyIsArray) {
+                // remove []
+                setNewPropertyType(type => {
+                  if (type.indexOf('[') !== -1) {
+                    return type.slice(0, type.length - 2)
+                  } else {
+                    return type;
+                  }
+                })
+              } else {
+                setNewPropertyType(type => type + '[]');
+              }
+              setNewPropertyIsArray(isArray => !isArray)
+            }}
+          />}
+          label="array?"
+          labelPlacement="top"
         />
         <IconButton
           aria-label="add property"

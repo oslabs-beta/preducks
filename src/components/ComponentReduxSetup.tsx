@@ -16,7 +16,7 @@ import {
   deleteState,
 } from '../actions/components';
 import DataTable from './DataTable';
-import {StoreInterface} from '../utils/Interfaces';
+import { StoreInterface } from '../utils/Interfaces';
 // console.log(dialog.showOpenDialog({ properties: ['openFile', 'openDirectory', 'multiSelections'] }))
 
 const numbersAsStrings = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -130,7 +130,7 @@ const ComponentReduxSetup: React.FC = (props: any): JSX.Element => {
         </div>
       ) : (
         <div className="props-container" style={{ marginTop: '20px' }}>
-          <Grid container spacing={8}>
+          {/* <Grid container spacing={8}> */}
             <div className="redux-connection-container">
               <h3 style={{ flex: 1, color: '#e0e0e0' }}>add redux connections</h3>
               <Grid item xs={12}>
@@ -166,8 +166,8 @@ const ComponentReduxSetup: React.FC = (props: any): JSX.Element => {
                 </div>
               </Grid>
             </div>
-          </Grid>
-          <Grid container spacing={8} direction="row">
+          {/* </Grid> */}
+          {/* <Grid container spacing={8} direction="row"> */}
             <div className="local-state-container">
               <form className="local-state-form" onSubmit={e => {
                   handleLocalStateSubmit(e);
@@ -228,16 +228,16 @@ const ComponentReduxSetup: React.FC = (props: any): JSX.Element => {
                   {'submit'}
                 </Button>
               </form>
+              <DataTable
+                rowHeader={['local state selections']}
+                rowData={focusComponent.componentState.map(
+                  state => `Name: ${state.name}.      Type: ${state.type}.      Initial Value: ${state.initialValue}`,
+                )}
+                deletePropHandler={name => dispatch(deleteState(name.match(/Name: \w+/)[0].slice(6)))}
+                editHandler={row => editHandler(row)}
+              />
             </div>
-            <DataTable
-              rowHeader={['local state selections']}
-              rowData={focusComponent.componentState.map(
-                state => `Name: ${state.name}.      Type: ${state.type}.      Initial Value: ${state.initialValue}`,
-              )}
-              deletePropHandler={name => dispatch(deleteState(name.match(/Name: \w+/)[0].slice(6)))}
-              editHandler={row => editHandler(row)}
-            />
-          </Grid>
+          {/* </Grid> */}
         </div>
       )}
     </div>

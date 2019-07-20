@@ -63,7 +63,7 @@ function dataTable(props: any) {
   ));
 
   return (
-    <Paper className={classes.root}>
+    <Paper className={classes.root + ', data-table'}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>{renderHeader}</TableRow>

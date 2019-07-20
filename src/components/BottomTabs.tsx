@@ -130,7 +130,7 @@ class BottomTabs extends Component<PropsInt> {
           <Tab
             disableRipple
             classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-            label={`component state & actions ${propCount ? `(${propCount})` : ''} `}
+            label={`local state & redux connection ${propCount ? `(${propCount})` : ''} `}
           />
           <Tab
             disableRipple
@@ -143,12 +143,14 @@ class BottomTabs extends Component<PropsInt> {
             label="Component State"
           /> */}
         </Tabs>
-        {value === 0 && <CodePreview focusComponent={focusComponent} components={components} />}
-        {value === 1 && <ComponentReduxSetup focusComponent={focusComponent} />}
-        {value === 2 && focusChild.childType === 'HTML' && <HtmlAttr />}
-        {value === 2 && focusChild.childType !== 'HTML' && (
-          <p>select an HTML element to view attributes</p>
-        )}
+        <div id="code-preview-outer">  
+          {value === 0 && <CodePreview focusComponent={focusComponent} components={components} />}
+          {value === 1 && <ComponentReduxSetup focusComponent={focusComponent} />}
+          {value === 2 && focusChild.childType === 'HTML' && <HtmlAttr />}
+          {value === 2 && focusChild.childType !== 'HTML' && (
+            <p>select an HTML element to view attributes</p>
+          )}
+        </div>
       </div>
     );
   }

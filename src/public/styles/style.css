@@ -12,10 +12,24 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu,
+    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
   overflow: hidden;
   background: #333;
+}
+
+#drag-bar {
+  margin-bottom: -20px;
+  height: 30px;
+  -webkit-app-region: drag;
+}
+
+#code-preview-outer {
+  width: 99%;
+  max-width: 100%;
+  max-height: 85%;
+  overflow-y: scroll;
 }
 
 /*
@@ -34,7 +48,7 @@ Remove focus styling
 
 #app {
   display: flex;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
 }
 
@@ -68,7 +82,7 @@ LEFT COLUMN
 */
 
 .left {
-  padding: 20px;
+  padding: 40px 20px 20px;
   width: 20%;
   max-height: 100%;
   min-width: 310px;
@@ -93,8 +107,57 @@ LEFT COLUMN
   padding: 1%;
 } */
 
+#html-component-panel {
+  color: white;
+  padding-bottom: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  max-width: 385px;
+  margin: auto;
+}
+
+#html-component-panel div[role='button'] {
+  width: 33%;
+  max-width: 98px;
+  margin: 10px 0 0;
+}
+
+#html-component-panel div[role='button'] span {
+  color: white !important;
+}
+
+#html-component-panel span {
+  width: 100%;
+  text-align: center;
+}
+
 .component-input {
   bottom: 2.8%;
+}
+
+.node-html-child div {
+  border-radius: 10px;
+  border: 1px solid white;
+  width: 100%;
+  text-align: center;
+  height: 24px;
+  color: white;
+}
+
+.node-html-child div.focused {
+  background: white;
+  font-weight: 600;
+}
+
+.node-html-child button {
+  width: 40px;
+  min-width: 40px;
+  visibility: hidden;
+}
+
+.node-html-child:hover button {
+  visibility: visible;
 }
 
 /* div:focus {
@@ -107,8 +170,9 @@ LEFT COLUMN
   /* justify-content: flex-start; */
   /* max-height: 80%; */
   /* color: #4e4e4e */
-  height: 1200px;
+  /* height: 1200px; */
   /* align-self: stretch; */
+  flex-grow: 1;
   overflow-y: scroll;
   /* overflow-x: hidden; */
   padding: 1%;
@@ -261,13 +325,27 @@ RIGHT COLUMN
 .right-panel .table-wrapper {
   width: auto;
   overflow-x: scroll;
+  z-index: -1000;
+}
+.right-panel .table-wrapper::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 1px;
+  height: 10px;
+}
+
+.right-panel .table-wrapper::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 .right-panel table {
   min-width: 100%;
 }
 
-.right-panel td, .right-panel th {
+.right-panel td,
+.right-panel th {
   padding: 0 20px;
   white-space: nowrap;
 }
@@ -299,7 +377,7 @@ RIGHT COLUMN
 }
 
 .right-panel button.disabled {
-  opacity: .4;
+  opacity: 0.4;
   cursor: default;
 }
 
@@ -374,7 +452,7 @@ tr:hover .property-controls,
 }
 
 .property-controls button {
-  background: #6F6F6F;
+  background: #6f6f6f;
 }
 
 .property-controls button:hover {
@@ -398,7 +476,7 @@ tr:hover .property-controls,
 }
 
 .form-error-message {
-  color: #F26E27 !important;
+  color: #f26e27 !important;
   font-weight: bolder;
   visibility: hidden;
 }
@@ -429,10 +507,10 @@ right-panel div:before,
   /* background-size: auto; */
   /* display: flex;
    */
-  height: 80%;
-  overflow-y: auto;
-  margin-left: 20px;
-  margin-top: 10px;
+  /* height: 80%; */
+  overflow-y: scroll;
+  /* margin-left: 20px;
+  margin-top: 10px; */
   font-size: 20px;
 }
 
@@ -447,22 +525,37 @@ right-panel div:before,
 .props-container {
   margin-left: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  flex-flow: row wrap;
 }
 
 .redux-connection-container {
   display: flex;
   flex-direction: column;
   align-items: left;
+  max-width: 820px;
 }
 
 .redux-selections {
   display: flex;
 }
+
+.props-container .data-table {
+  margin-right: 0;
+}
+
+.props-container .data-table table {
+  margin-right: 0;
+}
+
 .local-state-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.dataTable-root-1770 {
+  margin-right: none;
 }
 
 .props-input {
@@ -531,6 +624,10 @@ div.rst__rowContents {
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
+}
+
+.new-action-item span {
+  font-weight: 600;
 }
 
 .new-action-item button {

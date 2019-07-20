@@ -26,7 +26,7 @@ const styles = (theme: any): any => ({
     backgroundColor: '#333333',
     height: '100%',
     color: '#fff',
-    boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
+    // boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
   },
   tabsRoot: {
     borderBottom: '0.5px solid #424242',
@@ -143,7 +143,7 @@ class BottomTabs extends Component<PropsInt> {
             label="Component State"
           /> */}
         </Tabs>
-        <div id="code-preview-outer">  
+        <div id="code-preview-outer">
           {value === 0 && <CodePreview focusComponent={focusComponent} components={components} />}
           {value === 1 && <ComponentReduxSetup focusComponent={focusComponent} />}
           {value === 2 && focusChild.childType === 'HTML' && <HtmlAttr />}

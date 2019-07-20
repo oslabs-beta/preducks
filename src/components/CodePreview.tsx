@@ -23,7 +23,7 @@ class CodePreview extends Component<Props> {
         style={{
           marginBottom: '100px',
           overflow: 'auto',
-          fontSize: '18px',
+          fontSize: '14px',
           backgroundColor: '#262626',
           border: '2px solid #e0e0e0',
           borderRadius: '20px',

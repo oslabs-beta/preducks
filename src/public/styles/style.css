@@ -17,6 +17,9 @@ body {
   font-weight: 400;
   overflow: hidden;
   background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #drag-bar {
@@ -30,6 +33,7 @@ body {
   max-width: 100%;
   max-height: 85%;
   overflow-y: scroll;
+  z-index: -10;
 }
 
 /*
@@ -48,8 +52,8 @@ Remove focus styling
 
 #app {
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  width: 97vw;
+  height: 95vh;
 }
 
 .progress-bar {

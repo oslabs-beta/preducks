@@ -19,18 +19,10 @@ import createModal from '../utils/createModal.util';
 import cloneDeep from '../utils/cloneDeep';
 
 // /////// FOR TESTING ONLY//////////////////////////
-const {
-  dummyComponent,
-  dummyAllComponents,
-  storeConfigTicTacToe,
-  storeConfigTTTMultiReducer, // USING THIS FOR TESTING ON LINE 95
-  storeConfigTodo,
-} = require('../utils/dummyData');
 
 const dummyFilePath = '/Users/jacobrichards/Desktop/';
 // ///////////////////////////////////////////////////
 
-const IPC = require('electron').ipcRenderer;
 
 interface PropsInt {
   components: ComponentsInt;
@@ -123,20 +115,20 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
       genOption: 0,
     };
 
-    IPC.on('app_dir_selected', (event: any, path: string) => {
-      const { components, storeConfig } = this.props;
-      const { genOption } = this.state;
-      const appName = 'exported_preducks_app';
-      const exportAppBool = true;
-      this.props.createApp({
-        path,
-        components,
-        genOption,
-        appName,
-        exportAppBool,
-        storeConfig
-      });
-    });
+    // IPC.on('app_dir_selected', (event: any, path: string) => {
+    //   const { components, storeConfig } = this.props;
+    //   const { genOption } = this.state;
+    //   const appName = 'exported_preducks_app';
+    //   const exportAppBool = true;
+    //   this.props.createApp({
+    //     path,
+    //     components,
+    //     genOption,
+    //     appName,
+    //     exportAppBool,
+    //     storeConfig
+    //   });
+    // });
   }
 
   handleChange = (event: any) => {

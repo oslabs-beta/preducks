@@ -9,17 +9,19 @@ const BUILD_DIR = path.join(__dirname, 'build');
 const SRC_DIR = path.join(__dirname, 'src');
 
 module.exports = {
-  mode: 'development',
-  target: 'electron-main',
-  context: SRC_DIR,
   entry: ['babel-polyfill', './index.js'],
-  devtool: 'eval-source-map',
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  mode: 'development',
+  node: {
+    fs: 'empty',
   },
   output: {
     path: BUILD_DIR,
     filename: 'js/bundle.js',
+  },
+  context: SRC_DIR,
+  devtool: 'eval-source-map',
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   module: {
     rules: [
@@ -85,6 +87,8 @@ module.exports = {
   devServer: {
     contentBase: BUILD_DIR,
     hot: true,
+    compress: true,
+    port: 9000,
   },
   watch: true,
 };

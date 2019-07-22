@@ -1,4 +1,5 @@
-import { ComponentState } from 'react';
+import JSZip from 'jszip';
+import FileSaver from 'file-saver';
 import {
   ComponentInt,
   ComponentsInt,
@@ -50,6 +51,8 @@ import {
 import { loadState } from '../localStorage';
 import createComponentFiles from '../utils/createComponentFiles.util';
 import createApplicationUtil from '../utils/createApplication.util';
+
+const zip = new JSZip();
 
 export const loadInitData = () => (dispatch: any) => {
   loadState().then((data: any) => dispatch({
@@ -144,19 +147,21 @@ appName: string;
 exportAppBool: boolean;
 }) => (dispatch: any) => {
   // this dispatch sets the global state property 'loading' to true until the createComponentFiles call resolves below
-  dispatch({
-    type: EXPORT_FILES,
-  });
+  // dispatch({
+  //   type: EXPORT_FILES,
+  // });
 
-  createComponentFiles(components, path, appName, exportAppBool)
-    .then(dir => dispatch({
-      type: EXPORT_FILES_SUCCESS,
-      payload: { status: true, dir: dir[0] },
-    }))
-    .catch(err => dispatch({
-      type: EXPORT_FILES_ERROR,
-      payload: { status: true, err },
-    }));
+  const dir = createComponentFiles(components, path, appName, exportAppBool, zip);
+  dispatch({
+    type: EXPORT_FILES_SUCCESS,
+    payload: { status: true, dir: dir[0] },
+  });
+  zip.generateAsync({type: "blob"}).then(blob => {
+    FileSaver.saveAs(blob, "exported_preducks_app.zip");
+  }, function (err) {
+    console.log(err);
+  });
+  
 };
 
 export const handleClose = () => ({
@@ -217,6 +222,7 @@ storeConfig: StoreConfigInterface;
       appName,
       genOption,
       storeConfig,
+      zip
     })
       .then(() => {
         dispatch({

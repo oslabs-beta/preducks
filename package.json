@@ -37,6 +37,8 @@
     "babel-jest": "^24.8.0",
     "babel-polyfill": "^6.26.0",
     "d3": "^5.9.7",
+    "jszip": "^3.2.2",
+    "file-saver": "^2.0.2",
     "localforage": "^1.7.2",
     "lodash.throttle": "^4.1.1",
     "prettier": "^1.18.2",

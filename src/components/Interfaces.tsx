@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { TextField, IconButton, Icon } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 import * as actions from '../actions/components';
 import { InterfacesInterface, InputValidation } from '../utils/InterfaceDefinitions';
 import Interface from './Interface';

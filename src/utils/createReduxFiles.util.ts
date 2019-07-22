@@ -2,7 +2,7 @@
 import { number } from 'prop-types';
 import { createCipher } from 'crypto';
 import { format } from 'prettier/standalone.js';
-import parserTypescript from 'prettier/parser-typescript.js';
+import parserBabylon from 'prettier/parser-babylon.js';
 import { StoreConfigInterface } from './InterfaceDefinitions';
 
 function createInterfaces(interfaceObj) {
@@ -60,8 +60,12 @@ const createSharedInterfaces = (
     format(
       data,
       {
-        parser: 'typescript',
-        plugins: [parserTypescript],
+        singleQuote: true,
+        trailingComma: 'es5',
+        bracketSpacing: true,
+        jsxBracketSameLine: true,
+        parser: 'babel',
+        plugins: [parserBabylon],
       },
       (err) => {
         if (err) {
@@ -144,8 +148,12 @@ function createActionFiles(path, appName, storeConfig, reducerName, zip) {
     format(
       interfacesImportText + actionInterfacesText + actionTypesEnumText + typeGuardText,
       {
-        parser: 'typescript',
-        plugins: [parserTypescript],
+        singleQuote: true,
+        trailingComma: 'es5',
+        bracketSpacing: true,
+        jsxBracketSameLine: true,
+        parser: 'babel',
+        plugins: [parserBabylon],
       },
       (err) => {
         if (err) {
@@ -169,8 +177,12 @@ function createActionFiles(path, appName, storeConfig, reducerName, zip) {
     format(
       actionsImportText + interfacesImportText + actionCreatorsText,
       {
-        parser: 'typescript',
-        plugins: [parserTypescript],
+        singleQuote: true,
+        trailingComma: 'es5',
+        bracketSpacing: true,
+        jsxBracketSameLine: true,
+        parser: 'babel',
+        plugins: [parserBabylon],
       },
       (err) => {
         if (err) {
@@ -240,8 +252,12 @@ function createReducerFiles(path, appName, storeConfig, reducerName, zip) {
     format(
       importText + storeSliceInterfaceText + initialStateText + reducerText,
       {
-        parser: 'typescript',
-        plugins: [parserTypescript],
+        singleQuote: true,
+        trailingComma: 'es5',
+        bracketSpacing: true,
+        jsxBracketSameLine: true,
+        parser: 'babel',
+        plugins: [parserBabylon],
       },
       (err) => {
         if (err) {
@@ -285,8 +301,12 @@ const createActionsAndStoresForEachReducer = (
     format(
       rootReducerImportsText + storeInterfaceText + combineReducersText,
       {
-        parser: 'typescript',
-        plugins: [parserTypescript],
+        singleQuote: true,
+        trailingComma: 'es5',
+        bracketSpacing: true,
+        jsxBracketSameLine: true,
+        parser: 'babel',
+        plugins: [parserBabylon],
       },
       (err) => {
         if (err) {

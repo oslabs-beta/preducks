@@ -10,10 +10,6 @@ import cloneDeep from './cloneDeep';
 import store from '../store';
 import preducksDefaultDisplay from './preducksDefaultDisplay';
 
-// testing stuff
-// import { format } from 'prettier'; // also for testing
-// import { dummyComponent, dummyAllComponents } from './dummyData';
-
 const componentRender = (component: ComponentInt, components: ComponentsInt) => {
   const {
     childrenArray,

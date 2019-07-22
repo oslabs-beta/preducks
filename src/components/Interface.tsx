@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { TextField, IconButton, Icon } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TypeSelect from './TypeSelect';

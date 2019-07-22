@@ -1,5 +1,5 @@
 import { format } from 'prettier/standalone.js';
-import parserTypescript from 'prettier/parser-typescript.js';
+import parserBabylon from 'prettier/parser-babylon.js';
 import { createReduxFiles } from './createReduxFiles.util';
 import { StoreConfigInterface, ReducersInterface } from './InterfaceDefinitions';
 
@@ -58,8 +58,12 @@ export const createIndexTsx = (
   zip.file(
     filePath,
     format(reactText + reduxAndOrRemainingText, {
-      parser: 'typescript',
-      plugins: [parserTypescript],
+      singleQuote: true,
+      trailingComma: 'es5',
+      bracketSpacing: true,
+      jsxBracketSameLine: true,
+      parser: 'babel',
+      plugins: [parserBabylon],
     }),
   );
 };

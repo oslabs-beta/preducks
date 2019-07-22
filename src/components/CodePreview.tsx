@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { format } from 'prettier/standalone.js';
-import parserTypescript from 'prettier/parser-typescript.js';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { rainbow as style } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import parserBabylon from 'prettier/parser-babylon';
+import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+import { dark as style } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import componentRender from '../utils/componentRender.util';
 import { ComponentInt, ComponentsInt } from '../utils/InterfaceDefinitions';
 
-console.log(parserTypescript);
+SyntaxHighlighter.registerLanguage('jsx', jsx);
+
 // const format = prettier.format;
 type Props = {
   focusComponent: ComponentInt;
@@ -17,22 +19,28 @@ class CodePreview extends Component<Props> {
   render(): JSX.Element {
     const focusComponent: ComponentInt = this.props.focusComponent;
     const components: ComponentsInt = this.props.components;
-    // TODO: NEED TO FIGURE OUT HOW TO GET FORMATTING TO WORK ON CODE PREVIEW
     return (
-      <div
-        style={{
-          marginBottom: '100px',
-          overflow: 'auto',
-          fontSize: '14px',
-          backgroundColor: '#262626',
-          border: '2px solid #e0e0e0',
-          borderRadius: '20px',
-          margin: '20px',
-        }}>
-        <SyntaxHighlighter style={style} customStyle={{ background: 'transparent' }}>
+      <div>
+        <SyntaxHighlighter
+          style={style}
+          language="javascript"
+          customStyle={{
+            background: 'transparent',
+            border: '2px solid #e0e0e0',
+            marginBottom: '100px',
+            overflow: 'auto',
+            fontSize: '14px',
+            backgroundColor: '#262626',
+            borderRadius: '20px',
+            margin: '20px',
+          }}>
           {format(componentRender(focusComponent, components), {
-            parser: 'typescript',
-            plugins: [parserTypescript],
+            singleQuote: true,
+            trailingComma: 'es5',
+            bracketSpacing: true,
+            jsxBracketSameLine: true,
+            parser: 'babel',
+            plugins: [parserBabylon],
           })}
         </SyntaxHighlighter>
       </div>

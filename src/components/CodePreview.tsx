@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { format } from 'prettier/standalone';
-import parserTypescript from 'prettier/parser-typescript';
+import { format } from 'prettier/standalone.js';
+import parserTypescript from 'prettier/parser-typescript.js';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { rainbow as style } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import componentRender from '../utils/componentRender.util';

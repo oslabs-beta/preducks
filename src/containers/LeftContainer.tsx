@@ -171,10 +171,22 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
     // closeModal
     this.closeModal();
     // Choose app dir
-    this.chooseAppDir();
+    // this.chooseAppDir();
+      const { components, storeConfig } = this.props;
+      // const { genOption } = this.state;
+      const appName = 'exported_preducks_app';
+      const exportAppBool = true;
+      this.props.createApp({
+        path: '',
+        components,
+        genOption,
+        appName,
+        exportAppBool,
+        storeConfig
+      });
   };
 
-  chooseAppDir = () => IPC.send('choose_app_dir');
+  // chooseAppDir = () => IPC.send('choose_app_dir');
 
   showGenerateAppModal = () => {
     const { closeModal, chooseGenOptions } = this;

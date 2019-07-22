@@ -1,4 +1,4 @@
-import { StoreConfigInterface } from './Interfaces';
+import { StoreConfigInterface } from './InterfaceDefinitions';
 
 export const dummyComponent = {
   id: 1,

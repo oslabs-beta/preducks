@@ -6,7 +6,7 @@ import LeftContainer from './LeftContainer';
 import MainContainer from './MainContainer';
 import theme from '../components/theme';
 import { loadInitData } from '../actions/components';
-import { ComponentInt, ComponentsInt } from '../utils/interfaces';
+import { ComponentInt, ComponentsInt } from '../utils/InterfaceDefinitions';
 
 type Props = {
   components: ComponentsInt;

@@ -11,7 +11,7 @@ import {
   ReducersInterface,
   InterfacesInterface,
   ComponentStateInterface,
-} from './Interfaces';
+} from './InterfaceDefinitions';
 
 const initialComponentState: ComponentInt = {
   id: 0,

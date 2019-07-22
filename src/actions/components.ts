@@ -8,7 +8,7 @@ import {
   ReducersInterface,
   StoreConfigInterface,
   ComponentStateInterface,
-} from '../utils/Interfaces';
+} from '../utils/InterfaceDefinitions';
 import {
   LOAD_INIT_DATA,
   ADD_COMPONENT,

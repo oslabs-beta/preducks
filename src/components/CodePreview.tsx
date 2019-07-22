@@ -4,7 +4,7 @@ import parserTypescript from 'prettier/parser-typescript';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { rainbow as style } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import componentRender from '../utils/componentRender.util';
-import { ComponentInt, ComponentsInt } from '../utils/Interfaces';
+import { ComponentInt, ComponentsInt } from '../utils/InterfaceDefinitions';
 
 console.log(parserTypescript);
 // const format = prettier.format;

@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { deleteChild, changeFocusChild } from '../actions/components';
-import { StoreInterface } from '../utils/Interfaces';
+import { StoreInterface } from '../utils/InterfaceDefinitions';
 
 const HtmlChild: React.FC = (props: any): JSX.Element => {
   const { classes, childId, color } = props;
@@ -44,10 +44,13 @@ const HtmlChild: React.FC = (props: any): JSX.Element => {
   //   };
 
   return (
-    <ListItem button onClick={() => dispatch(changeFocusChild({ childId }))} className="node-html-child">
+    <ListItem
+      button
+      onClick={() => dispatch(changeFocusChild({ childId }))}
+      className="node-html-child">
       <div
-        style={{ color: (childId === focusChildId) ? color : '' }}
-        className={(childId === focusChildId) ? 'focused' : ''}>
+        style={{ color: childId === focusChildId ? color : '' }}
+        className={childId === focusChildId ? 'focused' : ''}>
         {props.componentName.toLowerCase()}
       </div>
       {deleteButton}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TextField, IconButton, Icon } from '@material-ui/core';
 import * as actions from '../actions/components';
-import { ReducersInterface, InputValidation } from '../utils/interfaces';
+import { ReducersInterface, InputValidation } from '../utils/InterfaceDefinitions';
 import Reducer from './Reducer';
 import validateInput from '../utils/validateInput.util';
 import ErrorMessage from './ErrorMessage';
@@ -18,20 +18,19 @@ const mapStateToProps = (store: any) => ({
 });
 
 interface PropsInterface {
-  setReducer: any,
-  deleteReducer: any,
-  interfaces: any,
-  reducers: any,
+  setReducer: any;
+  deleteReducer: any;
+  interfaces: any;
+  reducers: any;
 }
 
 interface StateInterface {
-  nameInput: string,
-  validation: InputValidation,
-  isVisible: boolean,
+  nameInput: string;
+  validation: InputValidation;
+  isVisible: boolean;
 }
 
 class Reducers extends Component<PropsInterface, StateInterface> {
-
   constructor(props: PropsInterface) {
     super(props);
     this.state = {
@@ -45,7 +44,7 @@ class Reducers extends Component<PropsInterface, StateInterface> {
     const target: HTMLInputElement = event.target;
     const result: InputValidation = validateInput(target.value);
     this.setState({ nameInput: target.value, validation: result });
-  }
+  };
 
   createReducer = () => {
     if (this.state.validation.isValid) {
@@ -65,44 +64,43 @@ class Reducers extends Component<PropsInterface, StateInterface> {
         <div id="reducers">
           {this.props.reducers
             && Object.keys(this.props.reducers).map(reducer => (
-            <Reducer
-              reducer={reducer}
-              reducers={this.props.reducers}
-              interfaces={this.props.interfaces}
-              setReducer={this.props.setReducer}
-              deleteReducer={this.props.deleteReducer}
-              key={'reducer' + reducer} />
-          ))}
+              <Reducer
+                reducer={reducer}
+                reducers={this.props.reducers}
+                interfaces={this.props.interfaces}
+                setReducer={this.props.setReducer}
+                deleteReducer={this.props.deleteReducer}
+                key={`reducer${reducer}`}
+              />
+            ))}
         </div>
-        <ErrorMessage validation={this.state.validation} visible={this.state.isVisible} />        
+        <ErrorMessage validation={this.state.validation} visible={this.state.isVisible} />
         <form id="new-reducer">
           <TextField
             label="new reducer"
             value={this.state.nameInput}
             onChange={this.handleChange}
-            onKeyPress={event => {
+            onKeyPress={(event) => {
               if (event.key === 'Enter') {
                 this.createReducer();
                 event.preventDefault();
               }
             }}
-            required />
+            required
+          />
           <IconButton
             aria-label="create reducer"
             onClick={this.createReducer}
-            className={(this.state.validation.isValid) ? '' : 'disabled'}>
+            className={this.state.validation.isValid ? '' : 'disabled'}>
             <Icon>add</Icon>
           </IconButton>
         </form>
       </section>
     );
-  };
-
+  }
 }
 
-export default 
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )
-(Reducers);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Reducers);

@@ -4,7 +4,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import HtmlAttr from './HtmlAttr';
 import CodePreview from './CodePreview';
-import { ComponentInt, ComponentsInt, ChildInt } from '../utils/interfaces';
+import { ComponentInt, ComponentsInt, ChildInt } from '../utils/InterfaceDefinitions';
 import ComponentReduxSetup from './ComponentReduxSetup';
 
 interface PropsInt {

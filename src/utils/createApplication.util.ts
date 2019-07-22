@@ -1,6 +1,6 @@
 // import { format } from 'prettier-standalone';
 import { createReduxFiles } from './createReduxFiles.util';
-import { StoreConfigInterface, ReducersInterface } from './Interfaces';
+import { StoreConfigInterface, ReducersInterface } from './InterfaceDefinitions';
 
 // const fs = require('fs');
 

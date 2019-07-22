@@ -530,7 +530,7 @@ right-panel div:before,
   margin-left: 10px;
   display: flex;
   justify-content: space-around;
-  flex-flow: row wrap;
+  /* flex-flow: row wrap; */
 }
 
 .redux-connection-container {
@@ -538,6 +538,8 @@ right-panel div:before,
   flex-direction: column;
   align-items: left;
   max-width: 820px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .redux-selections {
@@ -556,6 +558,8 @@ right-panel div:before,
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .dataTable-root-1770 {

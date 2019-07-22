@@ -16,5 +16,4 @@ module.exports = {
     electron: '<rootDir>/__mocks__/electron.js',
   },
   snapshotSerializers: ['enzyme-to-json/serializer'],
-  setupTestFrameworkScriptFile: '<rootDir>/src/setupEnzyme.ts',
 };

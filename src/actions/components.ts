@@ -1,5 +1,5 @@
-import { ComponentState } from 'react';
 import JSZip from 'jszip';
+import FileSaver from 'file-saver';
 import {
   ComponentInt,
   ComponentsInt,
@@ -147,19 +147,21 @@ appName: string;
 exportAppBool: boolean;
 }) => (dispatch: any) => {
   // this dispatch sets the global state property 'loading' to true until the createComponentFiles call resolves below
-  dispatch({
-    type: EXPORT_FILES,
-  });
+  // dispatch({
+  //   type: EXPORT_FILES,
+  // });
 
-  createComponentFiles(components, path, appName, exportAppBool)
-    .then(dir => dispatch({
-      type: EXPORT_FILES_SUCCESS,
-      payload: { status: true, dir: dir[0] },
-    }))
-    .catch(err => dispatch({
-      type: EXPORT_FILES_ERROR,
-      payload: { status: true, err },
-    }));
+  const dir = createComponentFiles(components, path, appName, exportAppBool, zip);
+  dispatch({
+    type: EXPORT_FILES_SUCCESS,
+    payload: { status: true, dir: dir[0] },
+  });
+  zip.generateAsync({type: "blob"}).then(blob => {
+    FileSaver.saveAs(blob, "predorks.zip");
+  }, function (err) {
+    console.log(err);
+  });
+  
 };
 
 export const handleClose = () => ({
@@ -219,7 +221,8 @@ storeConfig: StoreConfigInterface;
       path,
       appName,
       genOption,
-      storeConfig
+      storeConfig,
+      zip
     })
       .then(() => {
         dispatch({

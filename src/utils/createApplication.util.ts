@@ -1,26 +1,8 @@
 import { createReduxFiles } from './createReduxFiles.util';
 import { StoreConfigInterface, ReducersInterface } from './Interfaces';
 import {format} from 'prettier';
-import JSZip from 'jszip';
-import FileSaver from 'file-saver';
 
-const zip = new JSZip();
-
-function createFolders(path, appName, hasRedux) {
-  const pathRegex = new RegExp(`$${appName}^`);
-  if (zip.file(pathRegex).length === 0) {
-    zip.folder(`${appName}`); // make folder for whole app
-    zip.folder(`${appName}/src`); // make src folder
-    zip.folder(`${appName}/server`); // make server folder
-    zip.folder(`${appName}/src/components`); // make components folder
-    if (hasRedux) {
-      zip.folder(`${appName}/src/reducers`);
-      zip.folder(`${appName}/src/actions`);
-    }
-  }
-}
-
-function createIndexHtml(path, appName) {
+function createIndexHtml(path, appName, zip) {
   const filePath: string = `index.html`;
   const data: string = `
 <!DOCTYPE html>
@@ -43,6 +25,7 @@ export const createIndexTsx = (
   appName: string,
   hasRedux: boolean,
   hasAsync: boolean,
+  zip: any
 ): void => {
   const filePath = `src/index.tsx`;
   const reactText = `
@@ -75,7 +58,7 @@ export const createIndexTsx = (
   }));
 };
 
-const createPackage = (path: string, appName: string, hasRedux: boolean, hasAsync: boolean) => {
+const createPackage = (path: string, appName: string, hasRedux: boolean, hasAsync: boolean, zip: any) => {
   const filePath = `package.json`;
   const data = `
     {
@@ -141,7 +124,7 @@ const createPackage = (path: string, appName: string, hasRedux: boolean, hasAsyn
   zip.file(filePath, data);
 };
 
-const createWebpack = (path, appName) => {
+const createWebpack = (path, appName, zip) => {
   const filePath = `webpack.config.js`;
   const data = `
 var status = process.env.NODE_ENV; //taken from script so we don't have to flip mode when using development/production
@@ -188,7 +171,7 @@ module.exports = {
   zip.file(filePath, data);
 };
 
-const createBabel = (path, appName) => {
+const createBabel = (path, appName, zip) => {
   const filePath = `.babelrc`;
   const data = `
   {
@@ -198,7 +181,7 @@ const createBabel = (path, appName) => {
   zip.file(filePath, data);
 };
 
-const createTsConfig = (path, appName) => {
+const createTsConfig = (path, appName, zip) => {
   const filePath = `tsconfig.json`;
   const data = `
   {
@@ -217,7 +200,7 @@ const createTsConfig = (path, appName) => {
   zip.file(filePath, data);
 };
 
-const createTsLint = (path, appName) => {
+const createTsLint = (path, appName, zip) => {
   const filePath = `tslint.json`;
   const data = `
   {
@@ -243,7 +226,7 @@ const createTsLint = (path, appName) => {
   zip.file(filePath, data);
 };
 
-const createServer = (path, appName) => {
+const createServer = (path, appName, zip) => {
   const filePath = `server/server.js`;
   const data = `
   const express = require('express');
@@ -273,11 +256,13 @@ async function createApplicationUtil({
   appName,
   genOption,
   storeConfig,
+  zip
 }: {
-path: string;
-appName: string;
-genOption: number;
-storeConfig: StoreConfigInterface;
+  path: string;
+  appName: string;
+  genOption: number;
+  storeConfig: StoreConfigInterface;
+  zip: any;
 }) {
   if (genOption === 1) {
     const reducerNames = Object.keys(storeConfig.reducers);
@@ -291,22 +276,16 @@ storeConfig: StoreConfigInterface;
       });
     });
 
-    await createFolders(path, appName, hasRedux);
-    await createIndexHtml(path, appName);
+    await createIndexHtml(path, appName, zip);
     await createReduxFiles(path, appName, storeConfig, zip);
     // all of the redux stuff goes here.
-    await createIndexTsx(path, appName, hasRedux, hasAsync);
-    await createPackage(path, appName, hasRedux, hasAsync);
-    await createWebpack(path, appName);
-    await createBabel(path, appName);
-    await createTsConfig(path, appName);
-    await createTsLint(path, appName);
-    await createServer(path, appName);
-    zip.generateAsync({type: "blob"}).then(blob => {
-      FileSaver.saveAs(blob, "predorks.zip");
-    }, function (err) {
-      console.log(err);
-    });
+    await createIndexTsx(path, appName, hasRedux, hasAsync, zip);
+    await createPackage(path, appName, hasRedux, hasAsync, zip);
+    await createWebpack(path, appName, zip);
+    await createBabel(path, appName, zip);
+    await createTsConfig(path, appName, zip);
+    await createTsLint(path, appName, zip);
+    await createServer(path, appName, zip);
   }
 }
 export default createApplicationUtil;

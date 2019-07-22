@@ -7,14 +7,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
 import RemoveIcon from '@material-ui/icons/Remove';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import uuid from 'uuid';
 import Collapse from '@material-ui/core/Collapse';
 import HtmlChild from './HtmlChild';
-// import { ComponentInt, ComponentsInt, ChildInt } from '../utils/interfaces';
 
 export const LeftColExpansionPanel = (props: any) => {
   const {
@@ -85,7 +83,6 @@ export const LeftColExpansionPanel = (props: any) => {
           borderRadius: '10px',
           border: '2px solid white',
         }}>
-        {/* <DeleteIcon style={{ color: 'white' }} /> */}
         Delete Component
       </Button>
     </Fragment>

@@ -6,7 +6,6 @@ const resetLocalForage = () => {
 };
 
 export const saveState = (state) => {
-  console.log(state);
   localforage.setItem('state-v1.0.1', state, (err) => {
     if (err) {
       console.log(`error saving state: ${err}`);

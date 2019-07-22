@@ -52,7 +52,7 @@ Remove focus styling
 
 #app {
   display: flex;
-  width: 97vw;
+  width: 95vw;
   height: 95vh;
 }
 
@@ -169,17 +169,10 @@ LEFT COLUMN
 } */
 
 .expansionPanel {
-  /* flex-direction: column; */
-  /* display: flex; */
-  /* justify-content: flex-start; */
-  /* max-height: 80%; */
-  /* color: #4e4e4e */
-  /* height: 1200px; */
-  /* align-self: stretch; */
   flex-grow: 1;
   overflow-y: scroll;
-  /* overflow-x: hidden; */
-  padding: 1%;
+  overflow-x: hidden;
+  margin-bottom: 2vh;
 }
 
 .clear-workspace {
@@ -260,11 +253,11 @@ h1 {
 }
 
 .export-preference div span {
-  transition: color 1s, background-color 1.5s, transform 2s;
+  transition: color 1s, background1.5s, transform 2s;
 }
 
 .export-preference div:hover {
-  background-color: #303f9f;
+  background: #5cdb95;
 }
 
 .export-preference div:hover span {
@@ -651,8 +644,9 @@ div.rst__rowContents {
 }
 
 .right-panel section {
-  height: 50%;
+  height: 45%;
   overflow-y: scroll;
+  margin: 10px;
 }
 
 .right-panel .interface,

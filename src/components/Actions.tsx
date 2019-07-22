@@ -26,7 +26,7 @@ const Actions = (props: any) => {
   const [parameterNameIsVisible, setParameterNameVisiblility] = useState(false);
 
   const handleChange = (event: Event, setter: any, setValidation: any = '') => {
-    const target: HTMLInputElement = event.target;
+    const target: any = event.target;
     setter((target.type === 'checkbox') ? target.checked : target.value);
     if (setValidation !== '') {
       const result = validateInput(target.value);

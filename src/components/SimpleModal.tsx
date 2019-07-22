@@ -76,12 +76,16 @@ const SimpleModal = (props: any) => {
           <div>{children}</div>
           <div>
             {secBtnLabel ? (
-              <Button style={{ borderRadius: 10, background: '#45A29E' }} onClick={secBtnAction}>
+              <Button
+                style={{ borderRadius: 10, background: '#45A29E', margin: '10px' }}
+                onClick={secBtnAction}>
                 {secBtnLabel}
               </Button>
             ) : null}
             {primBtnLabel ? (
-              <Button onClick={primBtnAction} style={{ borderRadius: 10, background: '#5CDB95' }}>
+              <Button
+                onClick={primBtnAction}
+                style={{ borderRadius: 10, background: '#5CDB95', margin: '10px' }}>
                 {primBtnLabel}
               </Button>
             ) : null}

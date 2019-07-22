@@ -114,21 +114,6 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
       genOptions: ['export components', 'export app files & components'],
       genOption: 0,
     };
-
-    // IPC.on('app_dir_selected', (event: any, path: string) => {
-    //   const { components, storeConfig } = this.props;
-    //   const { genOption } = this.state;
-    //   const appName = 'exported_preducks_app';
-    //   const exportAppBool = true;
-    //   this.props.createApp({
-    //     path,
-    //     components,
-    //     genOption,
-    //     appName,
-    //     exportAppBool,
-    //     storeConfig
-    //   });
-    // });
   }
 
   handleChange = (event: any) => {
@@ -150,7 +135,7 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
   clearWorkspace = () => {
     this.setState({
       modal: createModal({
-        message: 'are you sure want to delete all data?',
+        message: 'delete all data?',
         closeModal: this.closeModal,
         secBtnLabel: 'clear workspace',
         open: true,
@@ -171,26 +156,20 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
     // closeModal
     this.closeModal();
     // Choose app dir
-    this.chooseAppDir();
   };
-
-  chooseAppDir = () => IPC.send('choose_app_dir');
 
   showGenerateAppModal = () => {
     const { closeModal, chooseGenOptions } = this;
     const { genOptions } = this.state;
     const children = (
-      <List className="export-preference">
+      <List>
         {genOptions.map((option, i) => (
           <ListItem
             key={i}
             button
+            className="export-preference"
             onClick={() => chooseGenOptions(i)}
-            style={{
-              border: '1px solid #3f51b5',
-              marginBottom: '2%',
-              marginTop: '5%',
-            }}>
+            style={{ borderRadius: 10, background: '#45A29E', margin: '10px' }}>
             <ListItemText primary={option} style={{ textAlign: 'center' }} />
           </ListItem>
         ))}

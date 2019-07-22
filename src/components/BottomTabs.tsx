@@ -4,7 +4,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import HtmlAttr from './HtmlAttr';
 import CodePreview from './CodePreview';
-import { ComponentInt, ComponentsInt, ChildInt } from '../utils/interfaces';
+import { ComponentInt, ComponentsInt, ChildInt } from '../utils/InterfaceDefinitions';
 import ComponentReduxSetup from './ComponentReduxSetup';
 
 interface PropsInt {
@@ -26,7 +26,7 @@ const styles = (theme: any): any => ({
     backgroundColor: '#333333',
     height: '100%',
     color: '#fff',
-    boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
+    // boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
   },
   tabsRoot: {
     borderBottom: '0.5px solid #424242',
@@ -130,7 +130,7 @@ class BottomTabs extends Component<PropsInt> {
           <Tab
             disableRipple
             classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-            label={`component state & actions ${propCount ? `(${propCount})` : ''} `}
+            label={`local state & redux connection ${propCount ? `(${propCount})` : ''} `}
           />
           <Tab
             disableRipple
@@ -143,12 +143,14 @@ class BottomTabs extends Component<PropsInt> {
             label="Component State"
           /> */}
         </Tabs>
-        {value === 0 && <CodePreview focusComponent={focusComponent} components={components} />}
-        {value === 1 && <ComponentReduxSetup focusComponent={focusComponent} />}
-        {value === 2 && focusChild.childType === 'HTML' && <HtmlAttr />}
-        {value === 2 && focusChild.childType !== 'HTML' && (
-          <p>select an HTML element to view attributes</p>
-        )}
+        <div id="code-preview-outer">
+          {value === 0 && <CodePreview focusComponent={focusComponent} components={components} />}
+          {value === 1 && <ComponentReduxSetup focusComponent={focusComponent} />}
+          {value === 2 && focusChild.childType === 'HTML' && <HtmlAttr />}
+          {value === 2 && focusChild.childType !== 'HTML' && (
+            <p>select an HTML element to view attributes</p>
+          )}
+        </div>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import Tree from 'react-d3-tree';
 import React, { useEffect, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { ComponentInt, ComponentsInt, ChildInt } from '../utils/interfaces';
+import { ComponentInt, ComponentsInt, ChildInt } from '../utils/InterfaceDefinitions';
 
 interface TreeInt {
   name: string;

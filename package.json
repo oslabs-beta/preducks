@@ -2,7 +2,7 @@
   "name": "preducks",
   "version": "1.0.0",
   "description": "prototyping tool for react + redux + typescript applications",
-  "main": "main.js",
+  "main": ".src/index.js",
   "contributors": [
     "jacob richards",
     "max gonzalez",
@@ -15,61 +15,16 @@
     "type": "git",
     "url": "https://github.com/oslabs-beta/preducks"
   },
-  "build": {
-    "appId": "com.team-preducks.preducks",
-    "copyright": "Copyright © 2019",
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
-      "maintainer": "sjaco"
-    },
-    "mac": {
-      "category": "public.app-category.developer-tools",
-      "target": "dmg"
-    },
-    "nsis": {
-      "createStartMenuShortcut": true,
-      "createDesktopShortcut": true,
-      "runAfterFinish": true
-    },
-    "win": {
-      "target": "nsis-web"
-    },
-    "files": [
-      "main.js",
-      "build"
-    ],
-    "productName": "",
-    "dmg": {
-      "contents": [
-        {
-          "x": 110,
-          "y": 150
-        },
-        {
-          "x": 240,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    }
-  },
   "scripts": {
     "prestart": "cross-env NODE_ENV=production webpack --config webpack.config.production.js",
-    "start": "cross-env NODE_ENV=production electron .",
-    "dev": "cross-env NODE_ENV=development webpack --config webpack.config.development.js & cross-env NODE_ENV=development electron .",
-    "electron": "cross-env NODE_ENV=development electron .",
+    "start": "cross-env NODE_ENV=production",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --config webpack.config.development.js --watch",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.production.js",
-    "build-bin": "electron-builder -mwl",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "linter": "eslint src",
-    "develop": "concurrently \"yarn run dev\" \"yarn run electron\""
+    "linter": "eslint src"
   },
   "bin": {
-    "preducks": "./index.js"
+    "preducks": "./src/index.js"
   },
   "preferGlobal": true,
   "license": "MIT",
@@ -87,14 +42,15 @@
     "cli-spinner": "^0.2.8",
     "commander": "^2.17.1",
     "d3": "^5.9.2",
-    "electron": "^5.0.6",
-    "electron-reload": "^1.4.1",
+    "express": "^4.17.1",
     "fetch-mock": "^7.3.6",
+    "file-saver": "^2.0.2",
+    "fs": "0.0.1-security",
+    "jszip": "^3.2.2",
     "localforage": "^1.7.2",
     "lodash.throttle": "^4.1.1",
     "prettier": "^1.18.2",
     "prop-types": "^15.6.2",
-    "puppeteer-core": "^1.18.1",
     "react": "^16.8.6",
     "react-d3-tree": "^1.12.3",
     "react-dom": "^16.8.6",
@@ -113,7 +69,6 @@
     "@types/enzyme": "^3.10.2",
     "@types/jest": "^24.0.15",
     "@typescript-eslint/parser": "^1.11.0",
-    "awesome-typescript-loader": "^5.2.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
     "babel-loader": "^7.1.4",
@@ -121,12 +76,8 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
-    "copy-webpack-plugin": "^4.5.2",
     "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
-    "electron-builder": "^20.28.1",
-    "electron-devtools-installer": "^2.2.4",
-    "electron-installer-dmg": "^2.0.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
@@ -141,14 +92,9 @@
     "html-webpack-plugin": "^3.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
-    "node-sass": "^4.12.0",
-    "postcss-loader": "^2.1.6",
-    "redux-mock-store": "^1.5.3",
-    "sass-loader": "^7.0.3",
-    "spectron": "^7.0.0",
-    "style-loader": "^0.20.3",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.4",
-    "webpack-cli": "^3.3.5"
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
   }
 }

@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Fab from '@material-ui/core/Fab';
 import { updateHtmlAttr } from '../actions/components';
 import { HTMLelements } from '../utils/htmlElements.util';
-import { ComponentInt, ChildInt } from '../utils/interfaces';
+import { ComponentInt, ChildInt } from '../utils/InterfaceDefinitions';
 
 interface PropsInt {
   updateHtmlAttr?: any;

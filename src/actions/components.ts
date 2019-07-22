@@ -9,7 +9,7 @@ import {
   ReducersInterface,
   StoreConfigInterface,
   ComponentStateInterface,
-} from '../utils/Interfaces';
+} from '../utils/InterfaceDefinitions';
 import {
   LOAD_INIT_DATA,
   ADD_COMPONENT,
@@ -157,7 +157,7 @@ exportAppBool: boolean;
     payload: { status: true, dir: dir[0] },
   });
   zip.generateAsync({type: "blob"}).then(blob => {
-    FileSaver.saveAs(blob, "predorks.zip");
+    FileSaver.saveAs(blob, "exported_preducks_app.zip");
   }, function (err) {
     console.log(err);
   });

@@ -1,6 +1,7 @@
 import { createReduxFiles } from './createReduxFiles.util';
-import { StoreConfigInterface, ReducersInterface } from './Interfaces';
-import {format} from 'prettier';
+import { StoreConfigInterface, ReducersInterface } from './InterfaceDefinitions';
+import {format} from 'prettier/standalone.js';
+import parserTypescript from 'prettier/parser-typescript.js';
 
 function createIndexHtml(path, appName, zip) {
   const filePath: string = `index.html`;
@@ -55,6 +56,7 @@ export const createIndexTsx = (
   }
   zip.file(filePath, format(reactText + reduxAndOrRemainingText, {
     parser: 'typescript',
+    plugins: [parserTypescript]
   }));
 };
 
@@ -149,11 +151,6 @@ module.exports = {
     publicPath: '/build/',
   },
 
-  module: {
-    rules: [
-      // All files with a '.ts' or '.tsx' extension will be handled by babel-loader
-      { test: /.tsx?$/, exclude: /node-modules/, loader: 'babel-loader' },
-
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       { enforce: 'pre', test: /.js$/, exclude: /node-modules/, loader: 'source-map-loader' },
       {
@@ -219,7 +216,6 @@ const createTsLint = (path, appName, zip) => {
       "no-console": false,
       "ordered-imports": false,
       "comment-format": false
-      // "jsx-key": false,
     }
   }
   `;

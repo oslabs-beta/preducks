@@ -9,7 +9,7 @@ import {
   changeFocusChild,
   changeComponentFocusChild,
 } from '../actions/components';
-import { ComponentInt, ComponentsInt } from '../utils/interfaces';
+import { ComponentInt, ComponentsInt } from '../utils/InterfaceDefinitions';
 import TreeDisplay from '../components/NewTreeDisplay';
 
 interface PropsInt {

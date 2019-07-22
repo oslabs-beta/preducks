@@ -1,4 +1,4 @@
-import { ComponentInt, ChildInt, ApplicationStateInt } from '../utils/interfaces';
+import { ComponentInt, ChildInt, ApplicationStateInt } from '../utils/InterfaceDefinitions';
 
 import * as types from '../actionTypes';
 

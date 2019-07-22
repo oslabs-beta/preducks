@@ -1,6 +1,8 @@
-import fs from 'fs';
-import { format } from 'prettier';
+// import fs from 'fs';
+// import { format } from 'prettier-standalone';
 import componentRender from './componentRender.util';
+import { format } from 'prettier/standalone.js';
+import parserTypescript from 'prettier/parser-typescript.js';
 
 const createComponentFiles = (
   components: any,
@@ -16,7 +18,8 @@ const createComponentFiles = (
       trailingComma: 'es5',
       bracketSpacing: true,
       jsxBracketSameLine: true,
-      parser: 'typescript'
+      parser: 'typescript',
+      plugins: [parserTypescript]
     }));
   });
   return path;

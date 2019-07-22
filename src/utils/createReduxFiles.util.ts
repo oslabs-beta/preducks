@@ -1,12 +1,14 @@
-import { format } from 'prettier';
+// import { format } from 'prettier-standalone';
 import { number } from 'prop-types';
 import { createCipher } from 'crypto';
-import { StoreConfigInterface } from './Interfaces';
+import { StoreConfigInterface } from './InterfaceDefinitions';
+import { format } from 'prettier/standalone.js';
+import parserTypescript from 'prettier/parser-typescript.js';
 
 function createInterfaces(interfaceObj) {
   let data = '';
 
-  // CREATE INTERFACESddddd
+//   // CREATE INTERFACESddddd
   Object.keys(interfaceObj).forEach((interfaceName) => {
     let curInterface = `export interface ${interfaceName} {\n`;
     Object.keys(interfaceObj[interfaceName]).forEach((property) => {
@@ -57,6 +59,7 @@ const createSharedInterfaces = (
     data,
     {
       parser: 'typescript',
+      plugins: [parserTypescript]
     },
     (err) => {
       if (err) {
@@ -110,8 +113,8 @@ function createActionFiles(path, appName, storeConfig, reducerName, zip) {
         };
       };`;
     } else {
-      curActionCreatorText = `export const ${actionName} = 
-      (${paramWithColonIfParamExists}${curActionObj.parameter.type}${bracketsIfParamIsAnArray}) : 
+      curActionCreatorText = `export const ${actionName} =
+      (${paramWithColonIfParamExists}${curActionObj.parameter.type}${bracketsIfParamIsAnArray}) :
       ${actionInterfaceName} => {
           // your code here ! add your own payload to the dispatched action.
           return {
@@ -137,6 +140,7 @@ function createActionFiles(path, appName, storeConfig, reducerName, zip) {
     interfacesImportText + actionInterfacesText + actionTypesEnumText + typeGuardText,
     {
       parser: 'typescript',
+      plugins: [parserTypescript]
     },
     (err) => {
       if (err) {
@@ -147,7 +151,7 @@ function createActionFiles(path, appName, storeConfig, reducerName, zip) {
     },
   ));
 
-  // ///// ACTIONS STUFF /////////////////////////////
+//   // ///// ACTIONS STUFF /////////////////////////////
 
   const actionsFile: string = `src/actions/${reducerName}Actions.ts`;
   // import dispatch, import the action types enum, and import ALL action interfaces
@@ -158,6 +162,7 @@ function createActionFiles(path, appName, storeConfig, reducerName, zip) {
     actionsImportText + interfacesImportText + actionCreatorsText,
     {
       parser: 'typescript',
+      plugins: [parserTypescript]
     },
     (err) => {
       if (err) {
@@ -204,7 +209,7 @@ function createReducerFiles(path, appName, storeConfig, reducerName, zip) {
     initialState,
   )}\n\n`;
 
-  let reducerText = `export const ${reducerName}Reducer = 
+  let reducerText = `export const ${reducerName}Reducer =
   (state: ${reducerName}StoreSliceInterface = initialState, action: ${
   numberOfActions ? `${reducerName}ActionInterfaceUnion` : 'any'
 }) => {
@@ -216,7 +221,7 @@ function createReducerFiles(path, appName, storeConfig, reducerName, zip) {
     // your logic here!
     return state;\n`;
   });
-  reducerText += `default: 
+  reducerText += `default:
       return state;
     }
   };`;
@@ -225,6 +230,7 @@ function createReducerFiles(path, appName, storeConfig, reducerName, zip) {
     importText + storeSliceInterfaceText + initialStateText + reducerText,
     {
       parser: 'typescript',
+      plugins: [parserTypescript]
     },
     (err) => {
       if (err) {
@@ -266,6 +272,7 @@ const createActionsAndStoresForEachReducer = (
     rootReducerImportsText + storeInterfaceText + combineReducersText,
     {
       parser: 'typescript',
+      plugins: [parserTypescript]
     },
     (err) => {
       if (err) {

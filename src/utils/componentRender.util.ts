@@ -5,7 +5,7 @@ import {
   ChildrenInt,
   PropInt,
   ComponentStateInterface,
-} from './Interfaces';
+} from './InterfaceDefinitions';
 import cloneDeep from './cloneDeep';
 import store from '../store';
 import preducksDefaultDisplay from './preducksDefaultDisplay';

@@ -14,23 +14,15 @@ import Fab from '@material-ui/core/Fab';
 import LeftColExpansionPanel from '../components/LeftColExpansionPanel';
 import HTMLComponentPanel from '../components/HTMLComponentPanel';
 import * as actions from '../actions/components';
-import { ComponentInt, ComponentsInt, StoreConfigInterface, StoreInterface } from '../utils/interfaces';
+import { ComponentInt, ComponentsInt, StoreConfigInterface, StoreInterface } from '../utils/InterfaceDefinitions';
 import createModal from '../utils/createModal.util';
 import cloneDeep from '../utils/cloneDeep';
 
 // /////// FOR TESTING ONLY//////////////////////////
-const {
-  dummyComponent,
-  dummyAllComponents,
-  storeConfigTicTacToe,
-  storeConfigTTTMultiReducer, // USING THIS FOR TESTING ON LINE 95
-  storeConfigTodo,
-} = require('../utils/dummyData');
 
 const dummyFilePath = '/Users/jacobrichards/Desktop/';
 // ///////////////////////////////////////////////////
 
-const IPC = require('electron').ipcRenderer;
 
 interface PropsInt {
   components: ComponentsInt;
@@ -123,20 +115,20 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
       genOption: 0,
     };
 
-    IPC.on('app_dir_selected', (event: any, path: string) => {
-      const { components, storeConfig } = this.props;
-      const { genOption } = this.state;
-      const appName = 'exported_preducks_app';
-      const exportAppBool = true;
-      this.props.createApp({
-        path,
-        components,
-        genOption,
-        appName,
-        exportAppBool,
-        storeConfig
-      });
-    });
+    // IPC.on('app_dir_selected', (event: any, path: string) => {
+    //   const { components, storeConfig } = this.props;
+    //   const { genOption } = this.state;
+    //   const appName = 'exported_preducks_app';
+    //   const exportAppBool = true;
+    //   this.props.createApp({
+    //     path,
+    //     components,
+    //     genOption,
+    //     appName,
+    //     exportAppBool,
+    //     storeConfig
+    //   });
+    // });
   }
 
   handleChange = (event: any) => {
@@ -179,10 +171,22 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
     // closeModal
     this.closeModal();
     // Choose app dir
-    this.chooseAppDir();
+    // this.chooseAppDir();
+      const { components, storeConfig } = this.props;
+      // const { genOption } = this.state;
+      const appName = 'exported_preducks_app';
+      const exportAppBool = true;
+      this.props.createApp({
+        path: '',
+        components,
+        genOption,
+        appName,
+        exportAppBool,
+        storeConfig
+      });
   };
 
-  chooseAppDir = () => IPC.send('choose_app_dir');
+  // chooseAppDir = () => IPC.send('choose_app_dir');
 
   showGenerateAppModal = () => {
     const { closeModal, chooseGenOptions } = this;
@@ -341,8 +345,8 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
           {addComponent}
           <div className="expansionPanel">{leftColExpansionPanels}</div>
         <HTMLComponentPanel
-            focusComponent={focusComponent}
             addChild={addChild}
+            focusComponent={focusComponent}
             />
         {clearAndExportButtons}
         {modal}

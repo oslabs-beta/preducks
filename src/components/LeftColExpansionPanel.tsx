@@ -35,7 +35,7 @@ export const LeftColExpansionPanel = (props: any) => {
   }
 
   const focusedStyle = {
-    boxShadow: '4px 2px 4px 2px rgba(150,150,150,0.2)',
+    boxShadow: 'rgba(150, 150, 150, 0.2) 0 0 4px 2px',
     background: color,
   };
 
@@ -126,6 +126,7 @@ export const LeftColExpansionPanel = (props: any) => {
           componentName={child.componentName}
           focusComponentID={focusComponent.id}
           components={components}
+          color={color}
         />,
       );
     } else if (child.childComponentId === id) {

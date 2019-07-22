@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleClose } from '../actions/components';
 import BottomTabs from './BottomTabs';
-import { ComponentInt, ComponentsInt, ChildInt } from '../utils/interfaces';
-
-const IPC = require('electron').ipcRenderer;
+import { ComponentInt, ComponentsInt, ChildInt } from '../utils/InterfaceDefinitions';
 
 const mapDispatchToProps = (dispatch: any) => ({
   handleNotificationClose: () => dispatch(handleClose()),

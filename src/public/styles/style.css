@@ -17,6 +17,9 @@ body {
   font-weight: 400;
   overflow: hidden;
   background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #drag-bar {
@@ -30,6 +33,7 @@ body {
   max-width: 100%;
   max-height: 85%;
   overflow-y: scroll;
+  z-index: -10;
 }
 
 /*
@@ -48,8 +52,8 @@ Remove focus styling
 
 #app {
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  width: 97vw;
+  height: 95vh;
 }
 
 .progress-bar {
@@ -526,7 +530,7 @@ right-panel div:before,
   margin-left: 10px;
   display: flex;
   justify-content: space-around;
-  flex-flow: row wrap;
+  /* flex-flow: row wrap; */
 }
 
 .redux-connection-container {
@@ -534,6 +538,8 @@ right-panel div:before,
   flex-direction: column;
   align-items: left;
   max-width: 820px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .redux-selections {
@@ -552,6 +558,8 @@ right-panel div:before,
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .dataTable-root-1770 {

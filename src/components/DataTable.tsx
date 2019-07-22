@@ -32,7 +32,7 @@ const styles = (theme: any) => ({
 
 function dataTable(props: any) {
   const {
-    classes, rowData, rowHeader, deletePropHandler, editHandler
+    classes, rowData, rowHeader, deletePropHandler, editHandler,
   } = props;
 
   const renderHeader = rowHeader.map((col: any, idx: number) => (
@@ -63,7 +63,7 @@ function dataTable(props: any) {
   ));
 
   return (
-    <Paper className={classes.root}>
+    <Paper className={`${classes.root}, data-table`}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>{renderHeader}</TableRow>

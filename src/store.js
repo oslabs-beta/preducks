@@ -7,16 +7,16 @@ import { saveState } from './localStorage';
 
 let composer;
 
-if (process.env.NODE_ENV === 'development') {
-  composer = compose(
-    applyMiddleware(thunk), // re-add logger if you want redux log messages
-    composeWithDevTools(),
-  );
-} else {
-  composer = compose(applyMiddleware(thunk));
-}
+// if (process.env.NODE_ENV === 'development') {
+//   composer = compose(
+//     applyMiddleware(thunk), // re-add logger if you want redux log messages
+//     composeWithDevTools(),
+//   );
+// } else {
+//   composer = compose(applyMiddleware(thunk));
+// }
 
-const store = createStore(reducers, composer);
+const store = createStore(reducers, applyMiddleware(thunk));
 
 store.subscribe(throttle(() => saveState(store.getState()), 1000));
 

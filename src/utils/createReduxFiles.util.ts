@@ -1,14 +1,14 @@
 // import { format } from 'prettier-standalone';
 import { number } from 'prop-types';
 import { createCipher } from 'crypto';
-import { StoreConfigInterface } from './InterfaceDefinitions';
 import { format } from 'prettier/standalone.js';
 import parserTypescript from 'prettier/parser-typescript.js';
+import { StoreConfigInterface } from './InterfaceDefinitions';
 
 function createInterfaces(interfaceObj) {
   let data = '';
 
-//   // CREATE INTERFACESddddd
+  //   // CREATE INTERFACESddddd
   Object.keys(interfaceObj).forEach((interfaceName) => {
     let curInterface = `export interface ${interfaceName} {\n`;
     Object.keys(interfaceObj[interfaceName]).forEach((property) => {
@@ -30,11 +30,11 @@ const createSharedInterfaces = (
   path: string,
   appName: string,
   storeConfig: StoreConfigInterface,
-  zip
+  zip: any,
 ): any => {
   // create reducers file path, and loop through reducers to create other reducer files
   // then build out index that combines reducers
-  const filePath: string = `src/Interfaces.ts`;
+  const filePath: string = 'src/Interfaces.ts';
   const interfaceObj = storeConfig.interfaces;
   const interfaceObjKeys = Object.keys(interfaceObj);
   if (interfaceObjKeys.length === 0) return;
@@ -55,20 +55,23 @@ const createSharedInterfaces = (
     data += curInterface;
   });
 
-  zip.file(filePath, format(
-    data,
-    {
-      parser: 'typescript',
-      plugins: [parserTypescript]
-    },
-    (err) => {
-      if (err) {
-        throw new Error(err.message);
-      } else {
-        console.log('interfaces written successfully');
-      }
-    },
-  ))
+  zip.file(
+    filePath,
+    format(
+      data,
+      {
+        parser: 'typescript',
+        plugins: [parserTypescript],
+      },
+      (err) => {
+        if (err) {
+          throw new Error(err.message);
+        } else {
+          console.log('interfaces written successfully');
+        }
+      },
+    ),
+  );
 };
 
 function createActionFiles(path, appName, storeConfig, reducerName, zip) {
@@ -136,42 +139,48 @@ function createActionFiles(path, appName, storeConfig, reducerName, zip) {
   const typeGuardText = `export type ${reducerName}ActionInterfaceUnion = ${actionInterfaceNames.join(
     '|',
   )};\n\n`;
-  zip.file(actionTypesFile, format(
-    interfacesImportText + actionInterfacesText + actionTypesEnumText + typeGuardText,
-    {
-      parser: 'typescript',
-      plugins: [parserTypescript]
-    },
-    (err) => {
-      if (err) {
-        throw new Error(err.message);
-      } else {
-        console.log('action types written successfully');
-      }
-    },
-  ));
+  zip.file(
+    actionTypesFile,
+    format(
+      interfacesImportText + actionInterfacesText + actionTypesEnumText + typeGuardText,
+      {
+        parser: 'typescript',
+        plugins: [parserTypescript],
+      },
+      (err) => {
+        if (err) {
+          throw new Error(err.message);
+        } else {
+          console.log('action types written successfully');
+        }
+      },
+    ),
+  );
 
-//   // ///// ACTIONS STUFF /////////////////////////////
+  //   // ///// ACTIONS STUFF /////////////////////////////
 
   const actionsFile: string = `src/actions/${reducerName}Actions.ts`;
   // import dispatch, import the action types enum, and import ALL action interfaces
   const actionsImportText = `import {Dispatch} from 'redux';
   import {${reducerName}ActionTypes, ${actionInterfaceNames.join(',')}} 
   from './${reducerName}ActionTypes'\n`;
-  zip.file(actionsFile, format(
-    actionsImportText + interfacesImportText + actionCreatorsText,
-    {
-      parser: 'typescript',
-      plugins: [parserTypescript]
-    },
-    (err) => {
-      if (err) {
-        throw new Error(err.message);
-      } else {
-        console.log('actions written successfully');
-      }
-    },
-  ));
+  zip.file(
+    actionsFile,
+    format(
+      actionsImportText + interfacesImportText + actionCreatorsText,
+      {
+        parser: 'typescript',
+        plugins: [parserTypescript],
+      },
+      (err) => {
+        if (err) {
+          throw new Error(err.message);
+        } else {
+          console.log('actions written successfully');
+        }
+      },
+    ),
+  );
 }
 
 function createReducerFiles(path, appName, storeConfig, reducerName, zip) {
@@ -226,20 +235,23 @@ function createReducerFiles(path, appName, storeConfig, reducerName, zip) {
     }
   };`;
 
-  zip.file(reducerFile, format(
-    importText + storeSliceInterfaceText + initialStateText + reducerText,
-    {
-      parser: 'typescript',
-      plugins: [parserTypescript]
-    },
-    (err) => {
-      if (err) {
-        throw new Error(err.message);
-      } else {
-        console.log('reducer files written successfully');
-      }
-    },
-  ));
+  zip.file(
+    reducerFile,
+    format(
+      importText + storeSliceInterfaceText + initialStateText + reducerText,
+      {
+        parser: 'typescript',
+        plugins: [parserTypescript],
+      },
+      (err) => {
+        if (err) {
+          throw new Error(err.message);
+        } else {
+          console.log('reducer files written successfully');
+        }
+      },
+    ),
+  );
 }
 
 const createActionsAndStoresForEachReducer = (
@@ -247,9 +259,9 @@ const createActionsAndStoresForEachReducer = (
   path: string,
   appName: string,
   storeConfig: StoreConfigInterface,
-  zip
+  zip,
 ): void => {
-  const rootReducerFile: string = `src/reducers/index.ts`;
+  const rootReducerFile: string = 'src/reducers/index.ts';
   let rootReducerImportsText = "import {combineReducers} from 'redux';\n";
   let storeInterfaceText = 'export interface StoreInterface {\n';
   let combineReducersText = 'export const reducers = combineReducers<StoreInterface>({\n';
@@ -268,20 +280,23 @@ const createActionsAndStoresForEachReducer = (
   storeInterfaceText += '}\n\n';
   combineReducersText += '});\n';
 
-  zip.file(rootReducerFile, format(
-    rootReducerImportsText + storeInterfaceText + combineReducersText,
-    {
-      parser: 'typescript',
-      plugins: [parserTypescript]
-    },
-    (err) => {
-      if (err) {
-        throw new Error(err.message);
-      } else {
-        console.log('root reducer file written successfully');
-      }
-    },
-  ))
+  zip.file(
+    rootReducerFile,
+    format(
+      rootReducerImportsText + storeInterfaceText + combineReducersText,
+      {
+        parser: 'typescript',
+        plugins: [parserTypescript],
+      },
+      (err) => {
+        if (err) {
+          throw new Error(err.message);
+        } else {
+          console.log('root reducer file written successfully');
+        }
+      },
+    ),
+  );
 };
 
 export const createReduxFiles = async (
@@ -290,7 +305,7 @@ export const createReduxFiles = async (
   path: string,
   appName: string,
   storeConfig: StoreConfigInterface,
-  zip
+  zip: any,
 ): Promise<string> => {
   createSharedInterfaces(path, appName, storeConfig, zip);
   createActionsAndStoresForEachReducer(path, appName, storeConfig, zip);

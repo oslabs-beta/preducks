@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Checkbox, FormControlLabel, Icon, IconButton, TextField } from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
 import TypeSelect from './TypeSelect';
 import validateInput from '../utils/validateInput.util';
 import ErrorMessage from './ErrorMessage';
 
 const Store = (props: any) => {
-
   const {
-    reducer,
-    reducers,
-    interfaces,
-    setReducer,
+    reducer, reducers, interfaces, setReducer,
   } = props;
   const [validation, setValidation] = useState(validateInput(''));
   const [propertyName, setPropertyName] = useState('');
@@ -21,12 +21,12 @@ const Store = (props: any) => {
 
   const handleChange = (event: Event, setter: any) => {
     const target: HTMLInputElement = event.target;
-    setter((target.type === 'checkbox') ? target.checked : target.value);
+    setter(target.type === 'checkbox' ? target.checked : target.value);
     if (target.type === 'text') {
       const result = validateInput(target.value);
       setValidation(result);
     }
-  }
+  };
 
   const addProperty = () => {
     if (validation.isValid && propertyType && propertyInitialValue) {
@@ -45,13 +45,13 @@ const Store = (props: any) => {
     } else {
       setVisibility(true);
     }
-  }
+  };
 
   const deleteProperty = (property: string) => {
     const updatedReducer = reducers[reducer];
     delete updatedReducer.store[property];
     setReducer({ [reducer]: updatedReducer });
-  }
+  };
 
   return (
     <div id="store">
@@ -66,66 +66,79 @@ const Store = (props: any) => {
               <th>initial</th>
               <th></th>
             </tr>
-            {reducers[reducer].store && Object.keys(reducers[reducer].store).map(store => (
-              <tr key={"store" + store}>
-                <td>{store}</td>
-                <td>{reducers[reducer].store[store].type}</td>
-                <td>{(reducers[reducer].store[store].array) ? '✓' : '×' }</td>
-                <td className="code">{reducers[reducer].store[store].initialValue}</td>
-                <td className="property-controls">
-                  <IconButton
-                    aria-label={`delete store item "${store}"`}
-                    onClick={() => deleteProperty(store)}>
-                    <Icon>delete</Icon>
-                  </IconButton>
-                </td>
-              </tr>
-            ))}
+            {reducers[reducer].store
+              && Object.keys(reducers[reducer].store).map(store => (
+                <tr key={`store${store}`}>
+                  <td>{store}</td>
+                  <td>{reducers[reducer].store[store].type}</td>
+                  <td>{reducers[reducer].store[store].array ? '✓' : '×'}</td>
+                  <td className="code">{reducers[reducer].store[store].initialValue}</td>
+                  <td className="property-controls">
+                    <IconButton
+                      aria-label={`delete store item "${store}"`}
+                      onClick={() => deleteProperty(store)}>
+                      <Icon>delete</Icon>
+                    </IconButton>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
-      <ErrorMessage validation={validation} visible={isVisible} />        
+      <ErrorMessage validation={validation} visible={isVisible} />
       <form className="new-store-item">
         <TextField
           label="name"
           value={propertyName}
-          onChange={() => { handleChange(event, setPropertyName) }}
-          required />
+          onChange={() => {
+            handleChange(event, setPropertyName);
+          }}
+          required
+        />
         <TypeSelect
           selectName="store-property-type"
           outer={reducer}
           interfaces={interfaces}
           value={propertyType}
-          handleChange={(event: Event) => { handleChange(event, setPropertyType) }} />
+          handleChange={(event: Event) => {
+            handleChange(event, setPropertyType);
+          }}
+        />
         <FormControlLabel
-          control = {
+          control={
             <Checkbox
               checked={propertyIsArray}
-              onChange={() => { handleChange(event, setPropertyIsArray) }} />
+              onChange={() => {
+                handleChange(event, setPropertyIsArray);
+              }}
+            />
           }
-          label="array" />
+          label="array"
+        />
         <TextField
           label="initial value"
           value={propertyInitialValue}
-          onChange={() => { setPropertyInitialValue(event.target.value) }}
+          onChange={() => {
+            setPropertyInitialValue(event.target.value);
+          }}
           className="code"
-          onKeyPress={event => {
+          onKeyPress={(event) => {
             if (event.key === 'Enter') {
               addProperty();
               event.preventDefault();
             }
           }}
-          required />
+          required
+        />
         <IconButton
           aria-label="add property to store"
           onClick={addProperty}
-          className={(validation.isValid && propertyType && propertyInitialValue) ? '' : 'disabled'}>
+          className={validation.isValid && propertyType && propertyInitialValue ? '' : 'disabled'}>
           <Icon>add</Icon>
         </IconButton>
       </form>
     </div>
   );
-
 };
 
 export default Store;

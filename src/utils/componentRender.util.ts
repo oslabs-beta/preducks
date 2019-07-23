@@ -8,11 +8,7 @@ import {
 } from './InterfaceDefinitions';
 import cloneDeep from './cloneDeep';
 import store from '../store';
-import preducksDefaultDisplay from './preducksDefaultDisplay';
-
-// testing stuff
-// import { format } from 'prettier'; // also for testing
-// import { dummyComponent, dummyAllComponents } from './dummyData';
+// import preducksDefaultDisplay from './preducksDefaultDisplay';
 
 const componentRender = (component: ComponentInt, components: ComponentsInt) => {
   const {
@@ -210,9 +206,7 @@ const componentRender = (component: ComponentInt, components: ComponentsInt) => 
     .map(
       (child: ChildInt) => `<${componentNameGenerator(child)} ${propDrillTextGenerator(child)}/>`,
     )
-    .join('\n')}`
-    + `${title === 'App' ? preducksDefaultDisplay : ''}`
-    + '</div>';
+    .join('\n')}` + '</div>';
 
   const useStateCalls = componentState.length
     ? componentState

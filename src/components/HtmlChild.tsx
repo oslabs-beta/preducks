@@ -2,8 +2,6 @@ import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { deleteChild, changeFocusChild } from '../actions/components';
@@ -29,19 +27,6 @@ const HtmlChild: React.FC = (props: any): JSX.Element => {
       </Button>
     </Fragment>
   );
-  // const compStyle = childId === focusChildId
-  //   ? {
-  //     borderRadius: '10px',
-  //     border: '1px solid white',
-  //     color: 'black',
-  //     fontWeight: 600,
-  //     background: 'white',
-  //   }
-  //   : {
-  //     borderRadius: '10px',
-  //     border: '1px solid white',
-  //     color: '#FFFFFF',
-  //   };
 
   return (
     <ListItem
@@ -57,46 +42,5 @@ const HtmlChild: React.FC = (props: any): JSX.Element => {
     </ListItem>
   );
 };
-
-// const styles = theme => ({
-//   root: {
-//     display: 'flex',
-//     justifyContent: 'center',
-//     flexWrap: 'wrap',
-//   },
-//   chip: {
-//     color: 'white',
-//     backgroundColor: 'white',
-//   },
-//   column: {
-//     display: 'inline-flex',
-//     alignItems: 'baseline',
-//   },
-//   icon: {
-//     fontSize: '20px',
-//     color: 'white',
-//     opacity: '0.7',
-//     transition: 'all .2s ease',
-
-//     '&:hover': {
-//       color: 'red',
-//     },
-//   },
-//   cssLabel: {
-//     color: 'white',
-
-//     '&$cssFocused': {
-//       color: 'green',
-//     },
-//   },
-//   cssFocused: {},
-//   light: {
-//     color: '#eee',
-//   },
-//   avatar: {
-//     color: '#eee',
-//     fontSize: '10px',
-//   },
-// });
 
 export default withStyles({})(HtmlChild);

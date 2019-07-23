@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { Checkbox, FormControlLabel, Icon, IconButton, TextField } from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
 import TypeSelect from './TypeSelect';
 import validateInput from '../utils/validateInput.util';
 import ErrorMessage from './ErrorMessage';
@@ -26,7 +30,7 @@ const Actions = (props: any) => {
   const [parameterNameIsVisible, setParameterNameVisiblility] = useState(false);
 
   const handleChange = (event: Event, setter: any, setValidation: any = '') => {
-    const target: HTMLInputElement = event.target;
+    const target: any = event.target;
     setter((target.type === 'checkbox') ? target.checked : target.value);
     if (setValidation !== '') {
       const result = validateInput(target.value);

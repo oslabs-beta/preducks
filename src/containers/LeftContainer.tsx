@@ -114,21 +114,6 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
       genOptions: ['export components', 'export app files & components'],
       genOption: 0,
     };
-
-    // IPC.on('app_dir_selected', (event: any, path: string) => {
-    //   const { components, storeConfig } = this.props;
-    //   const { genOption } = this.state;
-    //   const appName = 'exported_preducks_app';
-    //   const exportAppBool = true;
-    //   this.props.createApp({
-    //     path,
-    //     components,
-    //     genOption,
-    //     appName,
-    //     exportAppBool,
-    //     storeConfig
-    //   });
-    // });
   }
 
   handleChange = (event: any) => {
@@ -150,7 +135,7 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
   clearWorkspace = () => {
     this.setState({
       modal: createModal({
-        message: 'are you sure want to delete all data?',
+        message: 'delete all data?',
         closeModal: this.closeModal,
         secBtnLabel: 'clear workspace',
         open: true,
@@ -171,55 +156,23 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
     // closeModal
     this.closeModal();
     // Choose app dir
-    // this.chooseAppDir();
-    const { components, storeConfig } = this.props;
-    // const { genOption } = this.state;
-    const appName = 'exported_preducks_app';
-    const exportAppBool = true;
-    this.props.createApp({
-      path: '',
-      components,
-      genOption,
-      appName,
-      exportAppBool,
-      storeConfig
-    });
+      const { components, storeConfig } = this.props;
+      // const { genOption } = this.state;
+      const appName = 'exported_preducks_app';
+      const exportAppBool = true;
+      this.props.createApp({
+        path: '',
+        components,
+        genOption,
+        appName,
+        exportAppBool,
+        storeConfig
+      });
   };
 
-  // chooseAppDir = () => IPC.send('choose_app_dir');
-
   showGenerateAppModal = () => {
-    const { closeModal, chooseGenOptions } = this;
-    const { genOptions } = this.state;
-    const children = (
-      <List className="export-preference">
-        {genOptions.map((option, i) => (
-          <ListItem
-            key={i}
-            button
-            onClick={() => chooseGenOptions(i)}
-            style={{
-              border: '1px solid #3f51b5',
-              marginBottom: '2%',
-              marginTop: '5%',
-            }}>
-            <ListItemText primary={option} style={{ textAlign: 'center' }} />
-          </ListItem>
-        ))}
-      </List>
-    );
-    this.setState({
-      modal: createModal({
-        closeModal,
-        children,
-        message: 'choose export preference',
-        primBtnLabel: null,
-        primBtnAction: null,
-        secBtnAction: null,
-        secBtnLabel: null,
-        open: true,
-      }),
-    });
+    const { chooseGenOptions } = this;
+    chooseGenOptions(1);
   };
 
   render(): JSX.Element {

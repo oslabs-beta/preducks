@@ -105,7 +105,6 @@ class MainContainer extends Component<PropsInt, StateInt> {
                 components={components}
                 focusComponent={focusComponent}
                 classes={classes}></TreeDisplay>
-              {this.state.windowWidth < 800 ? <RightPanel /> : ''}
             </div>
             {this.state.windowWidth >= 800 ? <RightPanel /> : ''}
           </div>

@@ -79,8 +79,14 @@ const TreeDisplay: React.FC<PropsInt> = (props): JSX.Element => {
     if (treeWrapper) {
       const treeSize = document.querySelector('g').getBBox();
       const container = treeWrapper.getBoundingClientRect();
+      if (container.width < 600) {
+        setTranslation({ x: container.width / 2, y: container.height / 2.3 });
+        const containerToTreeHeightRatio = container.height / treeSize.height;
+        setZoomLevel(containerToTreeHeightRatio);
+      } else {
+        setTranslation({ x: container.width / 2, y: container.height / 2.9 });
+      }
       const containerToTreeWidthRatio = container.width / treeSize.width;
-      setTranslation({ x: container.width / 2, y: container.height / 2.9 });
       setZoomLevel(containerToTreeWidthRatio);
     }
   };

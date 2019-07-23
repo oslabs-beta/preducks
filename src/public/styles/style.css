@@ -205,6 +205,35 @@ h1 {
   border-radius: 100px;
   /* overflow-x: hidden; */
 }
+#treewrapper {
+  height: 100%;
+  width: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+  .top-container {
+    height: 100%;
+    width: 100%;
+    border: 20px 0px 10px 0px;
+  }
+  .main {
+    width: 100% !important;
+    flex-direction: column;
+  }
+  .main-container {
+    width: 50vw;
+  }
+  #treeWrapper {
+    height: 50%;
+  }
+  .right-panel {
+    height: 50% !important;
+    width: 50vw !important;
+  }
+  section {
+    margin: 0;
+  }
+}
 
 .main-header {
   /* display: flex; */

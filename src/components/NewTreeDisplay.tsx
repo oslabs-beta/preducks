@@ -99,13 +99,7 @@ const TreeDisplay: React.FC<PropsInt> = (props): JSX.Element => {
   }, [props.components, props.focusComponent]);
 
   return (
-    <div
-      id="treeWrapper"
-      style={{
-        width: '100%',
-        height: '100%',
-      }}
-      ref={node => (treeWrapper = node)}>
+    <div id="treeWrapper" ref={node => (treeWrapper = node)}>
       <Tree
         data={[generateComponentTree(props.focusComponent.id, props.components)]}
         separation={{ siblings: 1, nonSiblings: 1 }}

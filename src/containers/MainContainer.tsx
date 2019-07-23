@@ -27,6 +27,8 @@ interface StateInt {
   x: number;
   y: number;
   modal: any;
+  windowWidth: 0;
+  windowHeight: 0;
 }
 
 const mapDispatchToProps = (dispatch: any) => ({
@@ -56,15 +58,34 @@ const mapStateToProps = (store: any) => ({
 });
 
 class MainContainer extends Component<PropsInt, StateInt> {
-  state = {
-    draggable: false,
-    toggleClass: true,
-    scaleX: 1,
-    scaleY: 1,
-    x: 0,
-    y: 0,
-    modal: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      draggable: false,
+      toggleClass: true,
+      scaleX: 1,
+      scaleY: 1,
+      x: 0,
+      y: 0,
+      modal: '',
+      windowWidth: 0,
+      windowHeight: 0,
+    };
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight });
+  }
 
   render() {
     const { modal } = this.state;
@@ -84,10 +105,11 @@ class MainContainer extends Component<PropsInt, StateInt> {
                 components={components}
                 focusComponent={focusComponent}
                 classes={classes}></TreeDisplay>
+              {this.state.windowWidth < 800 ? <RightPanel /> : ''}
             </div>
-            <RightPanel />
+            {this.state.windowWidth >= 800 ? <RightPanel /> : ''}
           </div>
-          <BottomPanel focusComponent={focusComponent} />
+          {this.state.windowWidth >= 800 ? <BottomPanel focusComponent={focusComponent} /> : ''}
         </div>
       </MuiThemeProvider>
     );

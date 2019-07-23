@@ -202,17 +202,7 @@ appName: string;
 exportAppBool: boolean;
 storeConfig: StoreConfigInterface;
 }) => (dispatch: any) => {
-  if (genOption === 0) {
-    exportAppBool = false;
-    dispatch(
-      exportFiles({
-        appName,
-        path,
-        components,
-        exportAppBool,
-      }),
-    );
-  } else if (genOption) {
+  if (genOption) {
     exportAppBool = true;
     dispatch({
       type: CREATE_APPLICATION,

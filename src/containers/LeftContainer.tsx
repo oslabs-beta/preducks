@@ -171,34 +171,8 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
   };
 
   showGenerateAppModal = () => {
-    const { closeModal, chooseGenOptions } = this;
-    const { genOptions } = this.state;
-    const children = (
-      <List>
-        {genOptions.map((option, i) => (
-          <ListItem
-            key={i}
-            button
-            className="export-preference"
-            onClick={() => chooseGenOptions(i)}
-            style={{ borderRadius: 10, background: '#45A29E', margin: '10px' }}>
-            <ListItemText primary={option} style={{ textAlign: 'center' }} />
-          </ListItem>
-        ))}
-      </List>
-    );
-    this.setState({
-      modal: createModal({
-        closeModal,
-        children,
-        message: 'choose export preference',
-        primBtnLabel: null,
-        primBtnAction: null,
-        secBtnAction: null,
-        secBtnLabel: null,
-        open: true,
-      }),
-    });
+    const { chooseGenOptions } = this;
+    chooseGenOptions(1);
   };
 
   render(): JSX.Element {

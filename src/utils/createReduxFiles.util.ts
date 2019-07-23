@@ -1,81 +1,28 @@
-// import { format } from 'prettier-standalone';
-import { number } from 'prop-types';
-import { createCipher } from 'crypto';
-import { format } from 'prettier/standalone.js';
-import parserBabylon from 'prettier/parser-babylon.js';
+import { formatter } from './formatter.util';
 import { StoreConfigInterface } from './InterfaceDefinitions';
 
-function createInterfaces(interfaceObj) {
-  let data = '';
-
-  //   // CREATE INTERFACESddddd
-  Object.keys(interfaceObj).forEach((interfaceName) => {
-    let curInterface = `export interface ${interfaceName} {\n`;
-    Object.keys(interfaceObj[interfaceName]).forEach((property) => {
-      // loop thru all properties of the current interface
-      const curType = interfaceObj[interfaceName][property];
-      curInterface += `${property}: ${curType};\n`;
-      // because curType needs to be flexible (can be an interface that was previously defined)
-      // we need to add this UI to the frontend so that each interface that is created is now
-      // an available type that can be applied when building subsequent interfaces.
-    });
-    curInterface += '}\n\n';
-    data += curInterface;
-  });
-  return data;
-}
-
 const createSharedInterfaces = (
-  // creates an Interfaces.tsx that all other redux files will import from.
   path: string,
   appName: string,
   storeConfig: StoreConfigInterface,
   zip: any,
 ): any => {
-  // create reducers file path, and loop through reducers to create other reducer files
-  // then build out index that combines reducers
   const filePath: string = 'src/Interfaces.ts';
   const interfaceObj = storeConfig.interfaces;
   const interfaceObjKeys = Object.keys(interfaceObj);
   if (interfaceObjKeys.length === 0) return;
-
   let data = '';
-  // CREATE INTERFACES
   interfaceObjKeys.forEach((interfaceName) => {
     let curInterface = `export interface ${interfaceName} {\n`;
     Object.keys(interfaceObj[interfaceName]).forEach((property) => {
-      // loop thru all properties of the current interface
       const curType = interfaceObj[interfaceName][property];
       curInterface += `${property}: ${curType};\n`;
-      // because curType needs to be flexible (can be an interface that was previously defined)
-      // we need to add this UI to the frontend so that each interface that is created is now
-      // an available type that can be applied when building subsequent interfaces.
     });
     curInterface += '}\n\n';
     data += curInterface;
   });
 
-  zip.file(
-    filePath,
-    format(
-      data,
-      {
-        singleQuote: true,
-        trailingComma: 'es5',
-        bracketSpacing: true,
-        jsxBracketSameLine: true,
-        parser: 'babel',
-        plugins: [parserBabylon],
-      },
-      (err) => {
-        if (err) {
-          throw new Error(err.message);
-        } else {
-          console.log('interfaces written successfully');
-        }
-      },
-    ),
-  );
+  zip.file(filePath, formatter(data));
 };
 
 function createActionFiles(path, appName, storeConfig, reducerName, zip) {
@@ -143,27 +90,12 @@ function createActionFiles(path, appName, storeConfig, reducerName, zip) {
   const typeGuardText = `export type ${reducerName}ActionInterfaceUnion = ${actionInterfaceNames.join(
     '|',
   )};\n\n`;
-  zip.file(
-    actionTypesFile,
-    format(
-      interfacesImportText + actionInterfacesText + actionTypesEnumText + typeGuardText,
-      {
-        singleQuote: true,
-        trailingComma: 'es5',
-        bracketSpacing: true,
-        jsxBracketSameLine: true,
-        parser: 'babel',
-        plugins: [parserBabylon],
-      },
-      (err) => {
-        if (err) {
-          throw new Error(err.message);
-        } else {
-          console.log('action types written successfully');
-        }
-      },
-    ),
-  );
+
+  const firstFormat = formatter(interfacesImportText + actionInterfacesText);
+
+  const secondFormat = formatter(typeGuardText);
+
+  zip.file(actionTypesFile, firstFormat + actionTypesEnumText + secondFormat);
 
   //   // ///// ACTIONS STUFF /////////////////////////////
 
@@ -172,27 +104,7 @@ function createActionFiles(path, appName, storeConfig, reducerName, zip) {
   const actionsImportText = `import {Dispatch} from 'redux';
   import {${reducerName}ActionTypes, ${actionInterfaceNames.join(',')}} 
   from './${reducerName}ActionTypes'\n`;
-  zip.file(
-    actionsFile,
-    format(
-      actionsImportText + interfacesImportText + actionCreatorsText,
-      {
-        singleQuote: true,
-        trailingComma: 'es5',
-        bracketSpacing: true,
-        jsxBracketSameLine: true,
-        parser: 'babel',
-        plugins: [parserBabylon],
-      },
-      (err) => {
-        if (err) {
-          throw new Error(err.message);
-        } else {
-          console.log('actions written successfully');
-        }
-      },
-    ),
-  );
+  zip.file(actionsFile, formatter(actionsImportText + interfacesImportText + actionCreatorsText));
 }
 
 function createReducerFiles(path, appName, storeConfig, reducerName, zip) {
@@ -219,7 +131,6 @@ function createReducerFiles(path, appName, storeConfig, reducerName, zip) {
       const replacedStr = storeSlicePropObj.initialValue
         .replace(/(\w+) ?(:)/g, (wholeMatch, groupOne, groupTwo) => `"${groupOne}"${groupTwo}`)
         .replace(/'/g, '"');
-      console.log('wizardry', replacedStr);
       initialState[storeSlicePropertyName] = JSON.parse(replacedStr);
     } catch (e) {
       initialState[storeSlicePropertyName] = storeSlicePropObj.initialValue;
@@ -237,7 +148,6 @@ function createReducerFiles(path, appName, storeConfig, reducerName, zip) {
     switch(action.type){\n`;
 
   Object.keys(storeConfig.reducers[reducerName].actions).forEach((actionTypeName) => {
-    // need each action name to do cases for each action type
     reducerText += `case ${reducerName}ActionTypes.${actionTypeName}:
     // your logic here!
     return state;\n`;
@@ -249,24 +159,7 @@ function createReducerFiles(path, appName, storeConfig, reducerName, zip) {
 
   zip.file(
     reducerFile,
-    format(
-      importText + storeSliceInterfaceText + initialStateText + reducerText,
-      {
-        singleQuote: true,
-        trailingComma: 'es5',
-        bracketSpacing: true,
-        jsxBracketSameLine: true,
-        parser: 'babel',
-        plugins: [parserBabylon],
-      },
-      (err) => {
-        if (err) {
-          throw new Error(err.message);
-        } else {
-          console.log('reducer files written successfully');
-        }
-      },
-    ),
+    formatter(importText + storeSliceInterfaceText + initialStateText + reducerText),
   );
 }
 
@@ -298,24 +191,7 @@ const createActionsAndStoresForEachReducer = (
 
   zip.file(
     rootReducerFile,
-    format(
-      rootReducerImportsText + storeInterfaceText + combineReducersText,
-      {
-        singleQuote: true,
-        trailingComma: 'es5',
-        bracketSpacing: true,
-        jsxBracketSameLine: true,
-        parser: 'babel',
-        plugins: [parserBabylon],
-      },
-      (err) => {
-        if (err) {
-          throw new Error(err.message);
-        } else {
-          console.log('root reducer file written successfully');
-        }
-      },
-    ),
+    formatter(rootReducerImportsText + storeInterfaceText + combineReducersText),
   );
 };
 

@@ -397,12 +397,14 @@ export const exportFilesSuccess = (
 export const exportFilesError = (
   state: ApplicationStateInt,
   { status, err }: { status: boolean; err: string },
-) => ({
+) => {
+  console.log('error exporting files', err);
+  return {
   ...state,
   errorOpen: status,
-  appDir: err,
   loading: false,
-});
+  }
+};
 
 export const handleClose = (state: ApplicationStateInt, status: string) => ({
   ...state,

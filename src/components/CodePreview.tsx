@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import { format } from 'prettier/standalone.js';
-import parserBabylon from 'prettier/parser-babylon';
 import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import { dark as style } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { formatter } from '../utils/formatter.util';
 import componentRender from '../utils/componentRender.util';
 import { ComponentInt, ComponentsInt } from '../utils/InterfaceDefinitions';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);
-
-// const format = prettier.format;
 type Props = {
   focusComponent: ComponentInt;
   components: ComponentsInt;
@@ -34,14 +31,7 @@ class CodePreview extends Component<Props> {
             borderRadius: '20px',
             margin: '20px',
           }}>
-          {format(componentRender(focusComponent, components), {
-            singleQuote: true,
-            trailingComma: 'es5',
-            bracketSpacing: true,
-            jsxBracketSameLine: true,
-            parser: 'babel',
-            plugins: [parserBabylon],
-          })}
+          {formatter(componentRender(focusComponent, components))}
         </SyntaxHighlighter>
       </div>
     );

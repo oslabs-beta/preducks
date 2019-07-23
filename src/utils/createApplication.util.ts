@@ -1,5 +1,4 @@
-import { format } from 'prettier/standalone.js';
-import parserBabylon from 'prettier/parser-babylon.js';
+import { formatter } from './formatter.util';
 import { createReduxFiles } from './createReduxFiles.util';
 import { StoreConfigInterface, ReducersInterface } from './InterfaceDefinitions';
 
@@ -12,7 +11,10 @@ function createIndexHtml(path, appName, zip) {
     <meta charset="UTF-8" />
     <title>preducks app</title>
   </head>
+  <link rel="stylesheet" type="text/css" href="./styles.css">
   <body>
+    <div id="preducks-display"><div id="title">quack quack quack, i'm a preducks app</div>
+    <img id="preduck" src="./preduck.svg"></img></div>
     <div id="root"></div>
     <script src="./build/bundle.js"></script>
   </body>
@@ -32,9 +34,7 @@ export const createIndexTsx = (
   const reactText = `
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import App from './components/App';
-    import "../styles.css";
-    `;
+    import App from './components/App';`;
 
   let reduxAndOrRemainingText;
   if (hasRedux) {
@@ -55,17 +55,7 @@ export const createIndexTsx = (
   } else {
     reduxAndOrRemainingText = "ReactDOM.render(<App />, document.getElementById('root'));";
   }
-  zip.file(
-    filePath,
-    format(reactText + reduxAndOrRemainingText, {
-      singleQuote: true,
-      trailingComma: 'es5',
-      bracketSpacing: true,
-      jsxBracketSameLine: true,
-      parser: 'babel',
-      plugins: [parserBabylon],
-    }),
-  );
+  zip.file(filePath, formatter(reactText + reduxAndOrRemainingText));
 };
 
 const createPackage = (
@@ -157,14 +147,13 @@ function createPreduckSVG(path, appName, zip) {
 function createStylesCss(path, appName, zip) {
   const dir = path;
   const filePath: string = 'styles.css';
-  const data: string = `body {
-    background: rgb(251, 180, 167);
-  }
-  
-  #App {
+  const data: string = `#preducks-display {
+    margin: -8px -8px 0px -8px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: rgb(251, 180, 167);
+    height: 100vh;
   }
   
   #title {
@@ -188,8 +177,7 @@ function createStylesCss(path, appName, zip) {
   #preduck {
     animation: spin 6s linear infinite;
     width: 30vw;
-  }  
-  `;
+  }`;
   zip.file(filePath, data);
 }
 

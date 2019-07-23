@@ -1,7 +1,4 @@
-// import fs from 'fs';
-// import { format } from 'prettier-standalone';
-import { format } from 'prettier/standalone.js';
-import parserBabylon from 'prettier/parser-babylon.js';
+import { formatter } from './formatter.util';
 import componentRender from './componentRender.util';
 
 const createComponentFiles = (
@@ -14,14 +11,7 @@ const createComponentFiles = (
   components.forEach((component: any) => {
     zip.file(
       `src/components/${component.title}.tsx`,
-      format(componentRender(component, components), {
-        singleQuote: true,
-        trailingComma: 'es5',
-        bracketSpacing: true,
-        jsxBracketSameLine: true,
-        parser: 'babel',
-        plugins: [parserBabylon],
-      }),
+      formatter(componentRender(component, components)),
     );
   });
   return path;

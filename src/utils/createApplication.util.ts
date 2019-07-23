@@ -4,22 +4,22 @@ import { StoreConfigInterface, ReducersInterface } from './InterfaceDefinitions'
 
 function createIndexHtml(path, appName, zip) {
   const filePath: string = 'index.html';
-  const data: string = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>preducks app</title>
-  </head>
-  <link rel="stylesheet" type="text/css" href="./styles.css">
-  <body>
-    <div id="preducks-display"><div id="title">quack quack quack, i'm a preducks app</div>
-    <img id="preduck" src="./preduck.svg"></img></div>
-    <div id="root"></div>
-    <script src="./build/bundle.js"></script>
-  </body>
-</html>
-  `;
+  const data: string = `<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <title>preducks app</title>
+    </head>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <body>
+      <div id="preducks-display">
+        <div id="title">quack quack quack, i'm a preducks app</div>
+        <img id="preduck" src="./preduck.svg"></img>
+      </div>
+      <div id="root"></div>
+      <script src="./build/bundle.js"></script>
+    </body>
+  </html>`;
   zip.file(filePath, data);
 }
 
@@ -183,8 +183,7 @@ function createStylesCss(path, appName, zip) {
 
 const createWebpack = (path, appName, zip) => {
   const filePath = 'webpack.config.js';
-  const data = `
-  const status = process.env.NODE_ENV;
+  const data = `const status = process.env.NODE_ENV;
   const path = require('path');
   
   module.exports = {

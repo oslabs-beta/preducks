@@ -8,7 +8,6 @@ import {
 } from './InterfaceDefinitions';
 import cloneDeep from './cloneDeep';
 import store from '../store';
-// import preducksDefaultDisplay from './preducksDefaultDisplay';
 
 const componentRender = (component: ComponentInt, components: ComponentsInt) => {
   const {
@@ -71,12 +70,7 @@ const componentRender = (component: ComponentInt, components: ComponentsInt) => 
   }
 
   function htmlAttrSanitizer(element: string) {
-    // TODO: debug localForage unhappiness to renable image imports
-    // this shouldn't be needed, but some characters make localForage unhappy
     return `'${element}'`;
-    // return element
-    //   .replace(/[a-z]+/gi, word => word[0].toUpperCase() + word.slice(1))
-    //   .replace(/[-_\s0-9\W]+/gi, '');
   }
   function componentNameGenerator(child: ChildInt) {
     if (child.childType === 'HTML') {
@@ -196,10 +190,6 @@ const componentRender = (component: ComponentInt, components: ComponentsInt) => 
   ${actions.length ? actionsText.join('\n') : ''}
   \n\n`;
 
-  // const propsText = `type Props = {
-  //   ${props.map(prop => `${prop.key}: ${typeSwitcher(prop.type)}`).join('\n')}
-  // }\n\n`;
-
   const childrenToRender = `<div id='${title}'>
     ${cloneDeep(childrenArray)
     .sort((a: ChildInt, b: ChildInt) => a.childSort - b.childSort)
@@ -223,7 +213,6 @@ const componentRender = (component: ComponentInt, components: ComponentsInt) => 
       .join('\n')
     : '';
 
-  const propDestructuringText = `const {${props.map(el => el.key).join(',\n')}} = props`;
   const functionalComponentBody = `
   const ${title}:React.FC = (props: any):JSX.Element => {
     ${useStateCalls}

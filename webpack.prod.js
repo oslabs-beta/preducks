@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 // const path = require('path');
 const merge = require('webpack-merge');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CompressionPlugin = require('compression-webpack-plugin');
 const common = require('./webpack.common.js');
 
@@ -22,5 +22,5 @@ module.exports = merge(common, {
       },
     },
   },
-  plugins: [new BundleAnalyzerPlugin(), new CompressionPlugin()],
+  plugins: [new CompressionPlugin()],
 });

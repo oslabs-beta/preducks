@@ -1,6 +1,8 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/oslabs-beta/preducks/pulls)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b0647ae0-9b38-4cf5-9b66-932bb2b02699/deploy-status)](https://app.netlify.com/sites/preducks/deploys)
 
+![preduck](https://raw.githubusercontent.com/palgorhythm/preducks-web/master/preducks-logo-text.svg?sanitize=true)
 **preducks** is a visual prototyping tool for developers employing **React** component architecture alongside the comprehensive type checking of **TypeScript**.
 In other words, **you can draw prototypes and export React / Typescript code!**
 

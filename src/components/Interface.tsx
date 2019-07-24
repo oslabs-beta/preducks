@@ -20,10 +20,12 @@ const Interface = (props: any) => {
   const [isVisible, setVisibility] = useState(false);
 
   const handleChange = (event: Event, setter: any) => {
-    const target: HTMLInputElement = event.target;
-    setter(target.value);
-    const result = validateInput(target.value);
-    setNewPropertyValidation(result);
+    if (event.target.length < 18) {
+      const target: HTMLInputElement = event.target;
+      setter(target.value);
+      const result = validateInput(target.value);
+      setNewPropertyValidation(result);
+    }
   };
 
   const addProperty = () => {

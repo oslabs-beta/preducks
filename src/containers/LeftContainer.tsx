@@ -117,10 +117,10 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
   }
 
   handleChange = (event: any) => {
-    const newValue: string = event.target.value;
-    this.setState({
-      componentName: newValue,
-    });
+    if(event.target.value.length < 18){
+      const newValue: string = event.target.value;
+      this.setState({componentName: newValue});
+    }
   };
 
   handleAddComponent = () => {

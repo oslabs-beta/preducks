@@ -24,12 +24,12 @@ class CodePreview extends Component<Props> {
           customStyle={{
             background: 'transparent',
             border: '2px solid #e0e0e0',
-            marginBottom: '100px',
             overflow: 'auto',
             fontSize: '14px',
             backgroundColor: '#262626',
             borderRadius: '20px',
-            margin: '20px',
+            margin: '10px 0px 0px 0px',
+            height: '24vh',
           }}>
           {formatter(componentRender(focusComponent, components))}
         </SyntaxHighlighter>

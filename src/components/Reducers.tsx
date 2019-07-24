@@ -43,9 +43,11 @@ class Reducers extends Component<PropsInterface, StateInterface> {
   }
 
   handleChange = (event: Event) => {
-    const target: HTMLInputElement = event.target;
-    const result: InputValidation = validateInput(target.value);
-    this.setState({ nameInput: target.value, validation: result });
+    if (event.target.value.length < 18) {
+      const target: HTMLInputElement = event.target;
+      const result: InputValidation = validateInput(target.value);
+      this.setState({ nameInput: target.value, validation: result });
+    }
   };
 
   createReducer = () => {

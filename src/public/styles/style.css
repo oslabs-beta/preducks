@@ -52,8 +52,8 @@ Remove focus styling
 
 #app {
   display: flex;
-  width: 95vw;
-  height: 95vh;
+  width: 98vw;
+  height: 98vh;
 }
 
 .progress-bar {
@@ -188,7 +188,7 @@ h1 {
   border-radius: 100px;
   /* overflow-x: hidden; */
 }
-#treewrapper {
+#treeWrapper {
   height: 100%;
   width: 100%;
 }

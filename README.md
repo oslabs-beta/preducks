@@ -44,7 +44,7 @@ We use Redux hooks (_useSelector()_) to connect components to the Redux store ra
 You can use the dropdowns to select which store properties you want your component to connect to, and to import actions you want your component to be able to dispatch. (Again, we use the _useDispatch()_ hook to give you access to _dispatch()_ rather than using _mapDispatchToProps()_).\
 ![addreduxconn](/images/addreduxconn.PNG)\
 \
-When you add store selections or actions to a component, they will show up on a list near the dropdowns. Here, you can remove anything you added from the component.
+When you add store selections or actions to a component, they will show up on a list near the dropdowns. Here, you can remove anything you added from the component.\
 ![store selections](/images/storeselections.PNG)\
 \
 You can also add pieces of local state to your component (we use only functional components in our app, so we use the _useState()_ hook instead of creating _this.state_ in a constructor). As usual, you supply the name, type, and value of the state you want to add. You can delete pieces of state with the trashcan icon next to the specific piece in the list of local state, and edit information about state using the pencil icon.

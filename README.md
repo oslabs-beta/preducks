@@ -19,12 +19,16 @@ grandparents as its children.\
 \
 To completely delete a component, click on it in the list of components and click the _DELETE COMPONENT_ button.\
 ![delete component](/images/deletecomponent.PNG)
-\
 #### creating the Redux store:
 Since our app uses TypeScript, we give you the opportunity to create TypeScript interfaces to describe the shapes of the data you wish to use in your Redux store. By default, we allow you to choose from the types _number_, _string_, _boolean_, and _any_. You can specify whether you want a value to be a single value of this type, or an array of these types. Once you define an interface, you will be able to use it as the data type of later values you define along with the default ones we provide.\
 To create an interface, type in the name of the interface in the _new interface_ field and press the _+_ button next to it.\
 ![create interface](/images/createinterface.PNG)\
+\
+You can add fields to an interface by entering a name and type for a field, and can also specify if you want that field to be an array, then clicking the plus button next to the form fields. Here we create an interface to describe a _person_ data type. We also create a _household_ interface that uses the _person_ interface we just made in a few of its fields.\
 ![add to interface](/images/interfacefields.PNG)\
+![add to interface](/images/household.PNG)\
+To delete an field, click the trashcan icon that appears next to the field when you hover over it.\
+To delete the entire interface, click on the trashcan icon that appears next to the interface's name.
 #### connecting React components to the Redux store:
 #### exporting your project:
 

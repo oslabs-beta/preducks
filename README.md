@@ -9,8 +9,8 @@ In other words, **you can draw prototypes and export React / Typescript code!**
 ## how to use:
 
 #### creating React components:
-To create a new React component, type the name of your component into the _add component_ box and click the _+_ button next to it.
-![PRs Welcome](/images/createcomponent.PNG)
+To create a new React component, type the name of your component into the _add component_ box and click the _+_ button next to it.\
+![create component](/images/createcomponent.PNG)\
 To add a component as a child of another component, click on the parent component in the list of components, and press the _+_ button next to the component you wish to add as a child. To remove a child from a parent, click on the parent on the list, and press the _-_ button which appears next to the component you wish to remove.
 You will not be able to add a component's parents or 
 grandparents as its children.

@@ -41,7 +41,7 @@ As before, you can delete individual store properties or actions by clicking on 
 #### connecting React components to the Redux store:
 You can connect a component to the Redux store (and also add local state to a component if necessary) using the _local state & redux connection_ tab at the bottom of the app.\
 We use Redux hooks (_useSelector()_) to connect components to the Redux store rather than using _mapStateToProps_ and wrapping the exported component in _connect()_.\
-You can use the dropdowns to select which store properties you want your component to connect to, and to import actions you want your component to be able to dispatch. (Again, we use the _useDispatch()_ hook to give you access to _dispatch()_ rather than using _mapDispatchToProps()_).
+You can use the dropdowns to select which store properties you want your component to connect to, and to import actions you want your component to be able to dispatch. (Again, we use the _useDispatch()_ hook to give you access to _dispatch()_ rather than using _mapDispatchToProps()_).\
 ![addreduxconn](/images/addreduxconn.PNG)\
 \
 When you add store selections or actions to a component, they will show up on a list near the dropdowns. Here, you can remove anything you added from the component.

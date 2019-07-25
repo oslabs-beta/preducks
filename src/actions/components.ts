@@ -157,7 +157,7 @@ exportAppBool: boolean;
     payload: { status: true, dir: dir[0] },
   });
   zip.generateAsync({type: "blob"}).then(blob => {
-    FileSaver.saveAs(blob, "exported_preducks_app.zip");
+    FileSaver.saveAs(blob, "preducksApp.zip");
   }, function (err) {
     console.log(err);
   });

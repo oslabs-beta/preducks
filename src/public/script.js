@@ -78,7 +78,7 @@ window.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('load', () => {
   setTimeout(() => {
     const app = document.createElement('script');
-    app.src = 'app.js';
+    app.src = './js/app.js';
     app.type = 'text/javascript';
     app.defer = true;
     document.head.appendChild(app);

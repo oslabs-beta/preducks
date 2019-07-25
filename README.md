@@ -2,9 +2,9 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 **preducks** is a visual prototyping tool for developers employing **React** component architecture and **Redux** state management, alongside the comprehensive type checking of **TypeScript**.
-In other words, **you can draw prototypes and export React / Typescript code!**
+In other words, **you can create prototypes and export React / Typescript code!**
 
-**preducks** allows the user to _visualize_ their application architecture dynamically, employing an _application tree_ and a _real-time component code preview_. The user can create components and load _instances_ of these components, as well as nested HTML elements, onto the canvas. The user can also specify the desired shape of their _Redux store_ and _reducers_, as well as _interfaces_ to describe the desired shape of their data, and connections between their components and the store using _Redux hooks_. This architecture can then be _exported_ as TypeScript application files to be used as a starter template for any repository.
+**preducks** allows the user to _visualize_ their application architecture dynamically, employing an _application tree_ and a _real-time component code preview_. The user can create components and load _instances_ of these components, as well as nested HTML elements, onto the tree. The user can also specify the desired shape of their _Redux store_ and _reducers_, as well as _interfaces_ to describe the desired shape of their data, and connections between their components and the store using _Redux hooks_. This architecture can then be _exported_ as TypeScript application files to be used as a starter template for any repository.
 
 ## how to use:
 
@@ -40,8 +40,8 @@ Under the store configuration options, you can also define action creators. This
 As before, you can delete individual store properties or actions by clicking on the trashcan icon that appears when you hover over them, and you can delete the entire reducer by clicking on the trashcan icon that appears next to the reducer name.
 #### connecting React components to the Redux store:
 You can connect a component to the Redux store (and also add local state to a component if necessary) using the _local state & redux connection_ tab at the bottom of the app.\
-We use Redux hooks (_useSelector()_) to connect components to the Redux store rather than using _mapStateToProps_ and wrapping the exported component in _connect()_.\
-You can use the dropdowns to select which store properties you want your component to connect to, and to import actions you want your component to be able to dispatch. (Again, we use the _useDispatch()_ hook to give you access to _dispatch()_ rather than using _mapDispatchToProps()_).\
+We use Redux hooks (_useSelector()_) to connect components to the Redux store rather than using a _mapStateToProps()_ function and wrapping the exported component in _connect()_.\
+You can use the dropdowns to select which store properties you want your component to connect to, and to import actions you want your component to be able to dispatch. (Again, we use the _useDispatch()_ hook to give you access to _dispatch()_ rather than using a _mapDispatchToProps()_ function).\
 ![addreduxconn](/images/addreduxconn.PNG)\
 \
 When you add store selections or actions to a component, they will show up on a list near the dropdowns. Here, you can remove anything you added from the component.\

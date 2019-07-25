@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
+import Tooltip from '@material-ui/core/Tooltip';
 import * as actions from '../actions/components';
 import { InterfacesInterface, InputValidation } from '../utils/InterfaceDefinitions';
 import Interface from './Interface';
@@ -64,7 +65,12 @@ class Interfaces extends Component<PropsInterface, StateInterface> {
   render() {
     return (
       <section>
-        <h2>Interfaces</h2>
+        <Tooltip
+          title="define typescript interfaces for use in reducers or for adding local state to components"
+          aria-label="define typescript interfaces for use in reducers or for adding local state to components"
+          placement="left">
+          <h2>Interfaces</h2>
+        </Tooltip>
         <div id="interfaces">
           {this.props.interfaces
             && Object.keys(this.props.interfaces).map(thisInterface => (

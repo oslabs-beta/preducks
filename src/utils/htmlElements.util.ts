@@ -10,32 +10,32 @@ interface htmlElementsInt {
 }
 
 const HTMLelements: htmlElementsInt = {
-  Image: {
+  image: {
     width: 100,
     height: 100,
     attributes: ['className', 'id', 'src'],
   },
-  Button: {
+  button: {
     width: 75,
     height: 28,
     attributes: ['className', 'id', 'text'],
   },
-  Form: {
+  form: {
     width: 150,
     height: 150,
     attributes: ['className', 'id', 'text'],
   },
-  Paragraph: {
+  paragraph: {
     width: 250,
     height: 75,
     attributes: ['className', 'id', 'text'],
   },
-  List: {
+  list: {
     width: 75,
     height: 75,
     attributes: ['className', 'id', 'text'],
   },
-  Link: {
+  link: {
     width: 50,
     height: 50,
     attributes: ['className', 'id', 'href', 'text'],

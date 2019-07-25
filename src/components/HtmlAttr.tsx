@@ -53,10 +53,13 @@ const mapStateToProps = (store: any) => ({
 });
 
 class HtmlAttr extends Component<PropsInt, StateInt> {
-  state = HTMLelements[this.props.focusChild.htmlElement].attributes.reduce((acc, attr) => {
-    acc[attr] = '';
-    return acc;
-  }, {});
+  constructor(props) {
+    super(props);
+    this.state = HTMLelements[this.props.focusChild.htmlElement].attributes.reduce((acc, attr) => {
+      acc[attr] = '';
+      return acc;
+    }, {});
+  }
 
   handleSave = (attr: string) => {
     this.props.updateHtmlAttr({ attr, value: this.state[attr] });

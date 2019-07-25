@@ -616,7 +616,35 @@ export const deleteActionFromComponent = (state: ApplicationStateInt, payload: s
   };
 };
 
-export const setReducer = (state: ApplicationStateInt, payload: ReducersInterface) => {
+export const setReducer = (state: ApplicationStateInt, payload: ReducersInterface) => { // also for deleting store elements
+  const reducerName = Object.keys(payload)[0];
+  const reducerStore = payload[reducerName].store;
+  const reducerActions = payload[reducerName].actions;
+  const components = state.components.map((component)=> {
+    const selectors = component.selectors.filter((selector) => {
+      const [curReducerName,curSelectorName] = selector.split('.');
+      return state.storeConfig.reducers[curReducerName] && reducerStore[curSelectorName];
+    })
+    const actions = component.actions.filter((action) => {
+      const [curReducerName,curActionName] = action.split('.');
+      return state.storeConfig.reducers[curReducerName] && reducerActions[curActionName];
+    })
+    return {...component, selectors, actions};
+  })
+
+  let focusComponent = {...state.focusComponent};
+  const selectors = focusComponent.selectors.filter((selector) => {
+    const [curReducerName,curSelectorName] = selector.split('.');
+    return state.storeConfig.reducers[curReducerName] && reducerStore[curSelectorName];
+  })
+  const actions = focusComponent.actions.filter((action) => {
+    const [curReducerName,curActionName] = action.split('.');
+    return state.storeConfig.reducers[curReducerName] && reducerActions[curActionName];
+  })
+  focusComponent = {...focusComponent, selectors, actions};
+
+
+
   const storeConfig = {
     interfaces: {
       ...state.storeConfig.interfaces,
@@ -624,15 +652,42 @@ export const setReducer = (state: ApplicationStateInt, payload: ReducersInterfac
     reducers: {
       ...state.storeConfig.reducers,
       ...payload,
-    },
+    }
   };
   return {
     ...state,
     storeConfig,
+    components,
+    focusComponent
   };
 };
 
+//! NEED TO DISPATCH DELETE ACTION AND DELETE SELECTOR FOR ALL COMPONENTS WITH ACTIONS/SELECTORS FROM THIS REDUCER WHEN DELETE REDUCER IS CALLED
 export const deleteReducer = (state: ApplicationStateInt, payload: string) => {
+
+  const components = state.components.map((component)=> {
+    const selectors = component.selectors.filter((selector) => {
+      const [curReducerName,curSelectorName] = selector.split('.');
+      return curReducerName !== payload;
+    })
+    const actions = component.actions.filter((action) => {
+      const [curReducerName,curActionName] = action.split('.');
+      return curReducerName !== payload;
+    })
+    return {...component, selectors, actions};
+  })
+
+  let focusComponent = {...state.focusComponent};
+  const selectors = focusComponent.selectors.filter((selector) => {
+    const [curReducerName,] = selector.split('.');
+    return curReducerName !== payload;
+  })
+  const actions = focusComponent.actions.filter((action) => {
+    const [curReducerName,] = action.split('.');
+    return curReducerName !== payload;
+  })
+  focusComponent = {...focusComponent, selectors, actions};
+
   const storeConfig = {
     interfaces: {
       ...state.storeConfig.interfaces,
@@ -645,28 +700,10 @@ export const deleteReducer = (state: ApplicationStateInt, payload: string) => {
   return {
     ...state,
     storeConfig,
+    components,
+    focusComponent
   };
 };
-
-// export const renameReducer = (
-//   state: ApplicationStateInt,
-//   payload: { oldName: string; newName: string },
-// ) => {
-//   const storeConfig = {
-//     interfaces: {
-//       ...state.storeConfig.interfaces,
-//     },
-//     reducers: {
-//       ...state.storeConfig.reducers,
-//       [payload.newName]: state.storeConfig.reducers[payload.oldName],
-//     },
-//   };
-//   delete storeConfig.reducers[payload.oldName];
-//   return {
-//     ...state,
-//     storeConfig,
-//   };
-// };
 
 export const setInterface = (state: ApplicationStateInt, payload: InterfacesInterface) => {
   const storeConfig = {
@@ -685,6 +722,7 @@ export const setInterface = (state: ApplicationStateInt, payload: InterfacesInte
 };
 
 export const deleteInterface = (state: ApplicationStateInt, payload: string) => {
+  // console.log('before', state, payload);
   const storeConfig = {
     interfaces: {
       ...state.storeConfig.interfaces,
@@ -694,31 +732,24 @@ export const deleteInterface = (state: ApplicationStateInt, payload: string) => 
     },
   };
   delete storeConfig.interfaces[payload];
+  let components : ComponentInt[] = [...state.components];
+  components = components.map((component) => {
+    let componentState = [...component.componentState];
+    componentState =  componentState.filter((localStatePiece) => localStatePiece.type !== payload);
+    return {...component,componentState}
+  })
+
+  const focusComponent = {...state.focusComponent};
+  const newFocusComponentState = [...focusComponent.componentState];
+  focusComponent.componentState = newFocusComponentState.filter((localStatePiece) => localStatePiece.type !== payload);
+
   return {
     ...state,
     storeConfig,
+    components,
+    focusComponent
   };
 };
-
-// export const renameInterface = (
-//   state: ApplicationStateInt,
-//   payload: { oldName: string; newName: string },
-// ) => {
-//   const storeConfig = {
-//     interfaces: {
-//       ...state.storeConfig.interfaces,
-//       [payload.newName]: state.storeConfig.interfaces[payload.oldName],
-//     },
-//     reducers: {
-//       ...state.storeConfig.reducers,
-//     },
-//   };
-//   delete storeConfig.interfaces[payload.oldName];
-//   return {
-//     ...state,
-//     storeConfig,
-//   };
-// };
 
 export const setState = (state: ApplicationStateInt, payload: ComponentStateInterface) => {
   const components = [...state.components];
@@ -763,31 +794,3 @@ export const deleteState = (state: ApplicationStateInt, payload: string) => {
     focusComponent,
   };
 };
-
-// export const renameState = (
-//   state: ApplicationStateInt,
-//   payload: { oldName: string; newName: string },
-// ) => {
-//   const components = [...state.components];
-//   const index = components.findIndex(comp => comp.title === state.focusComponent.title);
-//   const view = { ...components[index] };
-//   const piecesOfState = {
-//     ...view.componentState,
-//     [payload.newName]: view.componentState[payload.oldName],
-//   };
-//   delete piecesOfState[payload.oldName];
-//   view.componentState = piecesOfState;
-//   components.splice(index, 1, view);
-//   const focusComponent = { ...state.focusComponent };
-//   const pieceOfState = {
-//     ...focusComponent.componentState,
-//     [payload.newName]: focusComponent.componentState[payload.oldName],
-//   };
-//   delete pieceOfState[payload.oldName];
-//   focusComponent.componentState = pieceOfState;
-//   return {
-//     ...state,
-//     components,
-//     focusComponent,
-//   };
-// };

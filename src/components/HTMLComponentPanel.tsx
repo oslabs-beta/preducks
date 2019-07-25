@@ -23,50 +23,56 @@ const HTMLComponentPanel = (props: PropsInterface) => {
     <div id="html-component-panel">
       <span>add HTML element as child</span>
       <Chip
-        label="Image"
-        icon={<Image />}
+        style={{ borderColor: 'white' }}
+        label="image"
+        icon={<Image style={{ color: '#007BFF' }} />}
         onClick={() => {
-          handleCreateHTMLChild('Image');
+          handleCreateHTMLChild('image');
         }}
         variant="outlined"
       />
       <Chip
-        label="Form"
-        icon={<Description />}
+        label="form"
+        style={{ borderColor: 'white' }}
+        icon={<Description style={{ color: '#007BFF' }} />}
         onClick={() => {
-          handleCreateHTMLChild('Form');
+          handleCreateHTMLChild('form');
         }}
         variant="outlined"
       />
       <Chip
-        label="Button"
-        icon={<EditAttributes />}
+        label="button"
+        style={{ borderColor: 'white' }}
+        icon={<EditAttributes style={{ color: '#007BFF' }} />}
         onClick={() => {
-          handleCreateHTMLChild('Button');
+          handleCreateHTMLChild('button');
         }}
         variant="outlined"
       />
       <Chip
-        label="Link"
-        icon={<Link />}
+        label="link"
+        style={{ borderColor: 'white' }}
+        icon={<Link style={{ color: '#007BFF' }} />}
         onClick={() => {
-          handleCreateHTMLChild('Link');
+          handleCreateHTMLChild('link');
         }}
         variant="outlined"
       />
       <Chip
-        label="List"
-        icon={<List />}
+        label="list"
+        style={{ borderColor: 'white' }}
+        icon={<List style={{ color: '#007BFF' }} />}
         onClick={() => {
-          handleCreateHTMLChild('List');
+          handleCreateHTMLChild('list');
         }}
         variant="outlined"
       />
       <Chip
-        label="Paragraph"
-        icon={<LocalParking />}
+        label="paragraph"
+        style={{ borderColor: 'white' }}
+        icon={<LocalParking style={{ color: '#007BFF' }} />}
         onClick={() => {
-          handleCreateHTMLChild('Paragraph');
+          handleCreateHTMLChild('paragraph');
         }}
         variant="outlined"
       />

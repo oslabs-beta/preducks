@@ -139,7 +139,7 @@ const ComponentReduxSetup: React.FC = (props: any): JSX.Element => {
           <Grid item xs={12}>
             <FormControl required>
               <InputLabel className={classes.light} htmlFor="propType">
-                {'select'}
+                {`select ${title}`}
               </InputLabel>
               <Select
                 native
@@ -177,7 +177,7 @@ const ComponentReduxSetup: React.FC = (props: any): JSX.Element => {
             <Grid item xs={12}>
               <div className="redux-selections">
                 {submitValueUsingAction(
-                  'store selection',
+                  'redux state',
                   chosenSelector,
                   setChosenSelector,
                   addSelector,
@@ -193,7 +193,7 @@ const ComponentReduxSetup: React.FC = (props: any): JSX.Element => {
             <Grid item xs={12}>
               <div className="redux-selections">
                 {submitValueUsingAction(
-                  'action',
+                  'redux action',
                   chosenAction,
                   setChosenAction,
                   addActionToComponent,
@@ -207,8 +207,6 @@ const ComponentReduxSetup: React.FC = (props: any): JSX.Element => {
               </div>
             </Grid>
           </div>
-          {/* </Grid> */}
-          {/* <Grid container spacing={8} direction="row"> */}
           <div className="local-state-container">
             <form
               className="local-state-form"
@@ -327,10 +325,12 @@ const styles = theme => ({
   },
   light: {
     color: '#eee',
+    fontSize: '14px',
+    padding: '12px',
   },
   avatar: {
     color: '#eee',
-    fontSize: '10px',
+    fontSize: '11px',
   },
 });
 

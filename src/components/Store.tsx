@@ -4,6 +4,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
+import Tooltip from '@material-ui/core/Tooltip';
 import TypeSelect from './TypeSelect';
 import validateInput from '../utils/validateInput.util';
 import ErrorMessage from './ErrorMessage';
@@ -55,7 +56,12 @@ const Store = (props: any) => {
 
   return (
     <div id="store">
-      <h4>Store</h4>
+      <Tooltip
+        title="add pieces of state to the store for this reducer"
+        aria-label="add pieces of state to the store for this reducer"
+        placement="left">
+        <h4>Store</h4>
+      </Tooltip>
       <div className="table-wrapper">
         <table>
           <tbody>

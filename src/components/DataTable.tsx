@@ -14,14 +14,18 @@ import uuid from 'uuid';
 const styles = (theme: any) => ({
   root: {
     marginTop: theme.spacing.unit * 3,
-    marginRight: '100px',
-    backgroundColor: 'e0e0e0',
+    margin: '10px',
+    fontSize: '20px',
+    borderRadius: '10px',
+    backgroundColor: 'white',
     // overflowX: "auto"
   },
   table: {
     minWidth: 500,
     marginRight: '100px',
-    backgroundColor: 'e0e0e0',
+    fontSize: '20px',
+    borderRadius: '10px',
+    backgroundColor: 'white',
   },
 });
 

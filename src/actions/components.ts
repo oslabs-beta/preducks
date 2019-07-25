@@ -299,14 +299,6 @@ export const deleteReducer = (name: string) => ({
   payload: name,
 });
 
-// export const renameReducer = (oldName: string, newName: string) => ({
-//   type: RENAME_REDUCER,
-//   payload: {
-//     oldName,
-//     newName,
-//   },
-// });
-
 export const setInterface = (userInterface: InterfacesInterface) => ({
   type: SET_INTERFACE,
   payload: userInterface,
@@ -316,14 +308,6 @@ export const deleteInterface = (name: string) => ({
   type: DELETE_INTERFACE,
   payload: name,
 });
-
-// export const renameInterface = (oldName: string, newName: string) => ({
-//   type: RENAME_INTERFACE,
-//   payload: {
-//     oldName,
-//     newName,
-//   },
-// });
 
 export const setState = (state: ComponentStateInterface) => ({
   type: SET_STATE,
@@ -335,10 +319,3 @@ export const deleteState = (name: string) => ({
   payload: name,
 });
 
-// export const renameState = (oldName: string, newName: string) => ({
-//   type: RENAME_STATE,
-//   payload: {
-//     oldName,
-//     newName,
-//   },
-// });

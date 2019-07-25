@@ -9,14 +9,13 @@ const SRC_DIR = path.join(__dirname, 'src');
 module.exports = {
   entry: ['babel-polyfill', './index.js'],
   plugins: [
-    // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Production',
       template: 'public/index.html',
     }),
     new ExtractTextPlugin({
-      filename: 'styles/style.css',
+      filename: 'public/styles/style.css',
       allChunks: true,
     }),
   ],

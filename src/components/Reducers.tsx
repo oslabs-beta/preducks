@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
+import Tooltip from '@material-ui/core/Tooltip';
 import * as actions from '../actions/components';
 import { ReducersInterface, InputValidation } from '../utils/InterfaceDefinitions';
 import Reducer from './Reducer';
@@ -64,7 +65,9 @@ class Reducers extends Component<PropsInterface, StateInterface> {
   render() {
     return (
       <section>
-        <h2>Reducers</h2>
+        <Tooltip title="define redux reducers" aria-label="define redux reducers" placement="left">
+          <h2>Reducers</h2>
+        </Tooltip>
         <div id="reducers">
           {this.props.reducers
             && Object.keys(this.props.reducers).map(reducer => (

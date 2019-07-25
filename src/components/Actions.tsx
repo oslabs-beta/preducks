@@ -4,17 +4,14 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
+import Tooltip from '@material-ui/core/Tooltip';
 import TypeSelect from './TypeSelect';
 import validateInput from '../utils/validateInput.util';
 import ErrorMessage from './ErrorMessage';
 
 const Actions = (props: any) => {
-
   const {
-    reducer,
-    reducers,
-    interfaces,
-    setReducer,
+    reducer, reducers, interfaces, setReducer,
   } = props;
   const [propertyName, setPropertyName] = useState('');
   const [propertyIsAsync, setPropertyIsAsync] = useState(false);
@@ -31,57 +28,59 @@ const Actions = (props: any) => {
 
   const handleChange = (event: Event, setter: any, setValidation: any = '') => {
     const target: any = event.target;
-    setter((target.type === 'checkbox') ? target.checked : target.value);
+    setter(target.type === 'checkbox' ? target.checked : target.value);
     if (setValidation !== '') {
       const result = validateInput(target.value);
       setValidation(result);
     }
-  }
+  };
 
   const addProperty = () => {
-    if (nameValidation.isValid
-      && parameterNameValidation.isValid
-      && parameterType
-      && payloadType) {
-        const updatedReducer = reducers[reducer];
-        updatedReducer.actions[nameValidation.input] = {
-          parameter: {
-            name: parameterNameValidation.input,
-            type: parameterType,
-            array: parameterIsArray
-          },
-          payload: {
-            type: payloadType,
-            array: payloadIsArray
-          },
-          async: propertyIsAsync,
-        };
-        setReducer({ [reducer]: updatedReducer });
-        setPropertyName('');
-        setPropertyIsAsync(false);
-        setParameterName('');
-        setParameterType('');
-        setParameterIsArray(false);
-        setPayloadType('');
-        setPayloadIsArray(false);
+    if (nameValidation.isValid && parameterNameValidation.isValid && parameterType && payloadType) {
+      const updatedReducer = reducers[reducer];
+      updatedReducer.actions[nameValidation.input] = {
+        parameter: {
+          name: parameterNameValidation.input,
+          type: parameterType,
+          array: parameterIsArray,
+        },
+        payload: {
+          type: payloadType,
+          array: payloadIsArray,
+        },
+        async: propertyIsAsync,
+      };
+      setReducer({ [reducer]: updatedReducer });
+      setPropertyName('');
+      setPropertyIsAsync(false);
+      setParameterName('');
+      setParameterType('');
+      setParameterIsArray(false);
+      setPayloadType('');
+      setPayloadIsArray(false);
 
-        setNameVisibility(false);
-        setParameterNameVisiblility(false);
+      setNameVisibility(false);
+      setParameterNameVisiblility(false);
     } else {
       setNameVisibility(true);
       setParameterNameVisiblility(true);
     }
-  }
+  };
 
   const deleteProperty = (property: string) => {
     const updatedReducer = reducers[reducer];
     delete updatedReducer.actions[property];
     setReducer({ [reducer]: updatedReducer });
-  }
+  };
 
   return (
     <div id="actions">
-      <h4>Actions</h4>
+      <Tooltip
+        title="add an action to this reducer whose action creator takes in a parameter and dispatches an action with a payload"
+        aria-label="add an action to this reducer whose action creator takes in a parameter and dispatches an action with a payload"
+        placement="left">
+        <h4>Actions</h4>
+      </Tooltip>
       <div className="table-wrapper">
         <table>
           <tbody>
@@ -95,24 +94,25 @@ const Actions = (props: any) => {
               <th>payload array</th>
               <th></th>
             </tr>
-            {reducers[reducer].actions && Object.keys(reducers[reducer].actions).map(action => (
-              <tr key={"action" + action}>
-                <td>{action}</td>
-                <td>{(reducers[reducer].actions[action].async) ? '✓' : '×' }</td>
-                <td>{reducers[reducer].actions[action].parameter.name}</td>
-                <td>{reducers[reducer].actions[action].parameter.type}</td>
-                <td>{(reducers[reducer].actions[action].parameter.array) ? '✓' : '×' }</td>
-                <td>{reducers[reducer].actions[action].payload.type}</td>
-                <td>{(reducers[reducer].actions[action].payload.array) ? '✓' : '×' }</td>
-                <td className="property-controls">
-                  <IconButton
-                    aria-label={`delete action "${action}"`}
-                    onClick={() => deleteProperty(action)}>
-                    <Icon>delete</Icon>
-                  </IconButton>
-                </td>
-              </tr>
-            ))}
+            {reducers[reducer].actions
+              && Object.keys(reducers[reducer].actions).map(action => (
+                <tr key={`action${action}`}>
+                  <td>{action}</td>
+                  <td>{reducers[reducer].actions[action].async ? '✓' : '×'}</td>
+                  <td>{reducers[reducer].actions[action].parameter.name}</td>
+                  <td>{reducers[reducer].actions[action].parameter.type}</td>
+                  <td>{reducers[reducer].actions[action].parameter.array ? '✓' : '×'}</td>
+                  <td>{reducers[reducer].actions[action].payload.type}</td>
+                  <td>{reducers[reducer].actions[action].payload.array ? '✓' : '×'}</td>
+                  <td className="property-controls">
+                    <IconButton
+                      aria-label={`delete action "${action}"`}
+                      onClick={() => deleteProperty(action)}>
+                      <Icon>delete</Icon>
+                    </IconButton>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
@@ -122,15 +122,22 @@ const Actions = (props: any) => {
           <TextField
             label="name"
             value={propertyName}
-            onChange={() => { handleChange(event, setPropertyName, setNameValidation) }}
-            required />
+            onChange={() => {
+              handleChange(event, setPropertyName, setNameValidation);
+            }}
+            required
+          />
           <FormControlLabel
-            control = {
+            control={
               <Checkbox
                 checked={propertyIsAsync}
-                onChange={() => { handleChange(event, setPropertyIsAsync) }} />
+                onChange={() => {
+                  handleChange(event, setPropertyIsAsync);
+                }}
+              />
             }
-            label="async" />
+            label="async"
+          />
         </div>
         <ErrorMessage validation={parameterNameValidation} visible={parameterNameIsVisible} />
         <span>Parameter</span>
@@ -138,22 +145,32 @@ const Actions = (props: any) => {
           <TextField
             label="name"
             value={parameterName}
-            onChange={() => { handleChange(event, setParameterName, setParameterNameValidation) }}
-            required />
+            onChange={() => {
+              handleChange(event, setParameterName, setParameterNameValidation);
+            }}
+            required
+          />
           <TypeSelect
             selectName="parameter-type"
             outer={reducer}
             interfaces={interfaces}
             value={parameterType}
-            handleChange={(event: Event) => { handleChange(event, setParameterType) }}
-            required />
+            handleChange={(event: Event) => {
+              handleChange(event, setParameterType);
+            }}
+            required
+          />
           <FormControlLabel
-            control = {
+            control={
               <Checkbox
                 checked={parameterIsArray}
-                onChange={() => { handleChange(event, setParameterIsArray) }} />
+                onChange={() => {
+                  handleChange(event, setParameterIsArray);
+                }}
+              />
             }
-            label="array" />
+            label="array"
+          />
         </div>
         <ErrorMessage validation={nameValidation} visible={false} />
         <span>Payload</span>
@@ -163,31 +180,38 @@ const Actions = (props: any) => {
             outer={reducer}
             interfaces={interfaces}
             value={payloadType}
-            handleChange={(event: Event) => { handleChange(event, setPayloadType) }} />
+            handleChange={(event: Event) => {
+              handleChange(event, setPayloadType);
+            }}
+          />
           <FormControlLabel
-            control = {
+            control={
               <Checkbox
                 checked={payloadIsArray}
-                onChange={() => { handleChange(event, setPayloadIsArray) }} />
+                onChange={() => {
+                  handleChange(event, setPayloadIsArray);
+                }}
+              />
             }
-            label="array" />
+            label="array"
+          />
         </div>
         <IconButton
           aria-label="add action"
           onClick={addProperty}
           className={
-            (nameValidation.isValid
-              && parameterNameValidation.isValid
-              && parameterType
-              && payloadType
-            ) ? '' : 'disabled'
+            nameValidation.isValid
+            && parameterNameValidation.isValid
+            && parameterType
+            && payloadType
+              ? ''
+              : 'disabled'
           }>
           <Icon>add</Icon>
         </IconButton>
       </form>
     </div>
   );
-
 };
 
 export default Actions;

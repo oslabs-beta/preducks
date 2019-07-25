@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Tooltip from '@material-ui/core/Tooltip';
 import HtmlAttr from './HtmlAttr';
 import CodePreview from './CodePreview';
 import { ComponentInt, ComponentsInt, ChildInt } from '../utils/InterfaceDefinitions';
@@ -117,31 +118,31 @@ class BottomTabs extends Component<PropsInt> {
           value={value}
           onChange={this.handleChange}
           classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}>
-          {/* <Tab
-            disableRipple
-            classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-            label="Application Tree"
-          /> */}
           <Tab
             disableRipple
             classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
             label="code preview"
           />
-          <Tab
-            disableRipple
-            classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-            label={`local state & redux connection ${propCount ? `(${propCount})` : ''} `}
-          />
-          <Tab
-            disableRipple
-            classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-            label={`component HTML children ${htmlAttribCount ? `(${htmlAttribCount})` : ''} `}
-          />
-          {/* <Tab
-            disableRipple
-            classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-            label="Component State"
-          /> */}
+          <Tooltip
+            title="give selected component local state and/or connections to the redux store/actions"
+            aria-label="give selected component local state and/or connections to the redux store/actions"
+            placement="top">
+            <Tab
+              disableRipple
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+              label={`local state & redux connections ${propCount ? `(${propCount})` : ''} `}
+            />
+          </Tooltip>
+          <Tooltip
+            title="edit attributes of currently selected HTML element"
+            aria-label="edit attributes of currently selected HTML element"
+            placement="top">
+            <Tab
+              disableRipple
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+              label={'edit HTML child attributes'}
+            />
+          </Tooltip>
         </Tabs>
         <div id="code-preview-outer">
           {value === 0 && <CodePreview focusComponent={focusComponent} components={components} />}

@@ -1,23 +1,165 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="utf-8" />
     <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self' https: filesystem: data: ws: 'unsafe-eval' 'unsafe-inline'"
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1"
     />
-    <title>preducks</title>
-    <script src="https://unpkg.com/prettier@1.13.0/standalone.js"></script>
-    <script src="https://unpkg.com/prettier@1.13.0/parser-babylon.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
+    <meta name="description" content="" />
+    <title>preducks | draw prototypes, export React/Redux code</title>
+    <link rel="mask-icon" href="./mask-icon.svg" color="black" />
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
   </head>
-  <body>
-    <div id="drag-bar">&nbsp;</div>
-    <div id="app"></div>
+  <body id="preducks">
+    <header>
+      <div id="main">
+        <h2>
+          <img
+            id="footer-duck"
+            src="./images/preduck.svg"
+            alt="preducks duck logo"
+          />preducks
+        </h2>
+        <h1>
+          draw prototypes, export <br id="tagline-break" />React/Redux code
+        </h1>
+        <nav>
+          <a class="downloadLink" href=""
+            >download&nbsp;for&nbsp;<span class="platformName">macOS</span
+            >&nbsp;↓</a
+          >
+          <a href="">try&nbsp;in&nbsp;browser&nbsp;→</a>
+        </nav>
+      </div>
+      <img id="screenshot" src="./images/screenshot.png" alt="" />
+    </header>
+    <section id="features">
+      <div class="feature">
+        <img
+          src="./images/features/components@2x.png"
+          alt="screenshot of tree view within the preducks app"
+        />
+        <div class="description">
+          <h3>visualize the relationships between components</h3>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="description">
+          <h3>build Redux reducers and TypeScript interfaces quickly</h3>
+        </div>
+        <img
+          src="./images/features/reducers@2x.png"
+          alt="screenshot of reducer creation form within the preducks app"
+        />
+      </div>
+      <div class="feature">
+        <img
+          src="./images/features/attributes@2x.png"
+          alt="screenshot of HTML attribute specification form within the preducks app"
+        />
+        <div class="description">
+          <h3>add element attributes, local state, and redux connections</h3>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="description">
+          <h3>
+            view your code as it’s generated, and export it all when you’re done
+          </h3>
+        </div>
+        <img
+          src="./images/features/export@2x.png"
+          alt="screenshot of export code button within the preducks app"
+        />
+      </div>
+    </section>
+    <section id="get">
+      <div class="platform">
+        <a href="">
+          <img
+            src="./images/preducks-desktop.svg"
+            alt="app icon for preducks desktop"
+          />
+          <h4>download for <i class="platformName">macOS</i> ↓</h4>
+        </a>
+        <span
+          ><a href=""
+            ><span id="other-platform-names">Windows, Linux</span> →</a
+          ></span
+        >
+      </div>
+      <div class="platform">
+        <a class="downloadLink" href="">
+          <img
+            id="browser-icon"
+            srcset="
+              ./images/browsers/safari.png,
+              ./images/browsers/safari@2x.png 2x,
+              ./images/browsers/safari@3x.png 3x
+            "
+            src="./images/browsers/safari.png"
+            alt="browser app icon"
+          />
+          <h4>try in browser →</h4>
+        </a>
+        <span><a href="">app.preducks.com</a></span>
+      </div>
+      <div class="platform">
+        <a href="https://www.npmjs.com/package/preducks">
+          <div class="image-wrapper">
+            <img
+              srcset="
+                ./images/terminal.png,
+                ./images/terminal@2x.png 2x,
+                ./images/terminal@3x.png 3x
+              "
+              src="./images/terminal.png"
+              alt="terminal app icon"
+            />
+          </div>
+          <h4 class="code">npm i preducks</h4>
+        </a>
+        <span
+          ><a href="https://www.npmjs.com/package/preducks"
+            >check out the CLI on NPM →</a
+          ></span
+        >
+      </div>
+    </section>
+    <section id="github">
+      <figure>
+        <a
+          class="github-button"
+          href="https://github.com/oslabs-beta/preducks/subscription"
+          data-icon="octicon-eye"
+          data-size="large"
+          aria-label="Watch oslabs-beta/preducks on GitHub"
+          >Watch</a
+        >
+        <a
+          class="github-button"
+          href="https://github.com/oslabs-beta/preducks"
+          data-icon="octicon-star"
+          data-size="large"
+          aria-label="Star oslabs-beta/preducks on GitHub"
+          >Star</a
+        >
+      </figure>
+      <div class="description">
+        <h3>preducks is open source</h3>
+        <a href="https://github.com/oslabs-beta/preducks"
+          >view the repo on GitHub →</a
+        >
+      </div>
+    </section>
+    <footer>
+      <img class="spin" src="./images/preduck.svg" alt="preducks duck logo" />
+      <div id="disclaimers">
+        <span>© 2019 preducks/OSLabs. All rights reserved.</span>
+        <span
+          >Icon adapted from Duck by Nook Fulloption from the Noun Project</span
+        >
+      </div>
+    </footer>
   </body>
 </html>

@@ -99,8 +99,10 @@ const TreeDisplay: React.FC<PropsInt> = (props): JSX.Element => {
   });
 
   useEffect(() => {
-    // ('using effect bc focusComp or components changed');
-    // have to add this in bc useEffect above can't find treeWrapper dom node on first render
+    handleResize();
+  }, []);
+
+  useEffect(() => {
     handleResize();
   }, [props.components, props.focusComponent]);
 

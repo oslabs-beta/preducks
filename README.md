@@ -19,16 +19,24 @@ grandparents as its children.\
 \
 To completely delete a component, click on it in the list of components and click the _DELETE COMPONENT_ button.\
 ![delete component](/images/deletecomponent.PNG)
-#### creating the Redux store:
-Since our app uses TypeScript, we give you the opportunity to create TypeScript interfaces to describe the shapes of the data you wish to use in your Redux store. By default, we allow you to choose from the types _number_, _string_, _boolean_, and _any_. You can specify whether you want a value to be a single value of this type, or an array of these types. Once you define an interface, you will be able to use it as the data type of later values you define along with the default ones we provide.\
+#### creating interfaces for the Redux store:
+Since our app uses TypeScript, we give you the opportunity to create TypeScript interfaces to describe the shapes of the data you wish to use in your Redux store. By default, we allow you to choose from the types _number_, _string_, _boolean_, and _any_. You can specify whether you want a value to be a single value of this type, or an array of these types. Once you define an interface, you will be able to use it as the data type of later values you define along with the default ones we provide. All of your interfaces will be exported in a TypeScript file, and they will be imported in components that need them.\
 To create an interface, type in the name of the interface in the _new interface_ field and press the _+_ button next to it.\
 ![create interface](/images/createinterface.PNG)\
 \
 You can add fields to an interface by entering a name and type for a field, and can also specify if you want that field to be an array, then clicking the plus button next to the form fields. Here we create an interface to describe a _person_ data type. We also create a _household_ interface that uses the _person_ interface we just made in a few of its fields.\
 ![add to interface](/images/interfacefields.PNG)\
-![add to interface](/images/household.PNG)\
+![interface2](/images/household.PNG)\
 To delete an field, click the trashcan icon that appears next to the field when you hover over it.\
 To delete the entire interface, click on the trashcan icon that appears next to the interface's name.
+#### creating reducers for the Redux store
+The form to create reducers appears below the form to create interfaces. You create one the same way as interfaces. Just type the name of the reducer into the field and click the _+_ button. You can make multiple reducers. We combine them for you into one Redux store.\
+Once you create a reducer, you can start adding properties to its store. Specify a name for the propety, its type, whether or not it's an array, and an initial value. This will be used as the initial state for your Redux store, and we also generate a TypeScript interface to describe the shape of your store.\
+![store](/images/store.PNG)\
+Under the store configuration options, you can also define action creators. This is mainly just to create the boilerplate and type definitions; you'll have to add the logic for the action creators yourself once you export your project. You can provide a name for your action creator, specify whether or not it's asynchronous, give a name and type to the parameters expected by the action creator, and specify the type of its payload.\
+![actions](/images/actions.PNG)\
+\
+As before, you can delete individual store properties or actions by clicking on the trashcan icon that appears when you hover over them, and you can delete the entire reducer by clicking on the trashcan icon that appears next to the reducer name.
 #### connecting React components to the Redux store:
 #### exporting your project:
 

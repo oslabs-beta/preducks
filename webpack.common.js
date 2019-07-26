@@ -1,25 +1,23 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const webpackTargetElectronRenderer = require('webpack-target-electron-renderer');
 
-const BUILD_DIR = path.join(__dirname, 'build');
 const SRC_DIR = path.join(__dirname, 'src');
 
 const indexCss = new ExtractTextPlugin('index.css');
 
-module.exports = {
+const argv = require('minimist')(process.argv.slice(2));
+
+const targetOption = argv.target;
+const output = targetOption === 'web' ? 'build/web' : 'build/electron';
+const BUILD_DIR = path.join(__dirname, 'build');
+
+const options = {
   entry: { index: ['babel-polyfill', './index.js'] },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      title: 'app',
-      filename: 'index.html',
-      template: 'public/index.html',
-      chunks: ['index'],
-    }),
-    indexCss,
-  ],
+  target: targetOption,
   output: {
     path: BUILD_DIR,
     filename: 'js/[name].js',
@@ -27,11 +25,23 @@ module.exports = {
   },
   node: {
     fs: 'empty',
+    __dirname: false,
+    __filename: false,
   },
   context: SRC_DIR,
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
+  plugins: [
+    indexCss,
+    new HtmlWebpackPlugin({
+      title: 'app',
+      filename: 'index.html',
+      template: 'public/index.html',
+      chunks: ['index'],
+    }),
+    new CopyWebpackPlugin([{ from: './public/', to: '' }]),
+  ],
   module: {
     rules: [
       { test: /\.ts$/, exclude: /node-modules/, loader: 'babel-loader' },
@@ -50,3 +60,4 @@ module.exports = {
     ],
   },
 };
+module.exports = options;

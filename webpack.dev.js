@@ -10,7 +10,7 @@ const common = require('./webpack.common.js');
 const targetOption = argv.target;
 const output = targetOption === 'web' ? 'build/web' : 'build/electron';
 const BUILD_DIR = path.join(__dirname, output);
-console.log('dev build dir', BUILD_DIR);
+
 module.exports = merge(common, {
   devServer: {
     contentBase: BUILD_DIR,

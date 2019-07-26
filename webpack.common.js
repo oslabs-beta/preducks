@@ -1,9 +1,7 @@
 const path = require('path');
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-// const webpackTargetElectronRenderer = require('webpack-target-electron-renderer');
 
 const SRC_DIR = path.join(__dirname, 'src');
 
@@ -12,7 +10,7 @@ const indexCss = new ExtractTextPlugin('index.css');
 const argv = require('minimist')(process.argv.slice(2));
 
 const targetOption = argv.target;
-const output = targetOption === 'web' ? 'build/web' : 'build/electron';
+// const output = targetOption === 'web' ? 'build/web' : 'build/electron';
 const BUILD_DIR = path.join(__dirname, 'build');
 
 const options = {

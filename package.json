@@ -1,6 +1,6 @@
 {
   "name": "preducks",
-  "version": "1.0.0",
+  "version": "",
   "description": "prototyping tool for react + redux + typescript applications",
   "author": "preducks",
   "main": "main.js",
@@ -105,12 +105,12 @@
     "redux-thunk": "^2.3.0",
     "webpack": "^4.35.2",
     "webpack-merge": "^4.2.1",
-    "webpack-target-electron-renderer": "^0.4.0",
-    "electron": "^5.0.8",
-    "electron-devtools-installer": "^2.2.4",
-    "electron-prebuilt": "^1.4.13"
+    "webpack-target-electron-renderer": "^0.4.0"
   },
   "devDependencies": {
+    "electron": "^5.0.8",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-prebuilt": "^1.4.13",
     "@babel/preset-typescript": "^7.3.3",
     "@types/enzyme": "^3.10.2",
     "@types/jest": "^24.0.15",

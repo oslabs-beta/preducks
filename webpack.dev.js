@@ -2,10 +2,14 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+
+const argv = require('minimist')(process.argv.slice(2));
+
 const common = require('./webpack.common.js');
 
-const BUILD_DIR = path.join(__dirname, 'build');
-// const SRC_DIR = path.join(__dirname, 'src');
+const targetOption = argv.target;
+const output = targetOption === 'web' ? 'build/web' : 'build/electron';
+const BUILD_DIR = path.join(__dirname, output);
 
 module.exports = merge(common, {
   devServer: {
@@ -14,7 +18,7 @@ module.exports = merge(common, {
     compress: true,
   },
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   plugins: [new webpack.HotModuleReplacementPlugin()],
   watch: true,
 });

@@ -7,22 +7,27 @@ import AddIcon from '@material-ui/icons/Add';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+// import List from '@material-ui/core/List';
+// import ListItem from '@material-ui/core/ListItem';
+// import ListItemText from '@material-ui/core/ListItemText';
 import Fab from '@material-ui/core/Fab';
 import LeftColExpansionPanel from '../components/LeftColExpansionPanel';
 import HTMLComponentPanel from '../components/HTMLComponentPanel';
 import * as actions from '../actions/components';
-import { ComponentInt, ComponentsInt, StoreConfigInterface, StoreInterface } from '../utils/InterfaceDefinitions';
+import {
+  ComponentInt,
+  ComponentsInt,
+  StoreConfigInterface,
+  StoreInterface,
+} from '../utils/InterfaceDefinitions';
 import createModal from '../utils/createModal.util';
 import cloneDeep from '../utils/cloneDeep';
+
 
 // /////// FOR TESTING ONLY//////////////////////////
 
 const dummyFilePath = '/Users/jacobrichards/Desktop/';
 // ///////////////////////////////////////////////////
-
 
 interface PropsInt {
   components: ComponentsInt;
@@ -49,8 +54,8 @@ interface StateInt {
 
 const mapStateToProps = (store: StoreInterface) => ({
   components: store.workspace.components,
-  storeConfig: store.workspace.storeConfig
-})
+  storeConfig: store.workspace.storeConfig,
+});
 
 const mapDispatchToProps = (dispatch: any) => ({
   addComponent: ({ title }: { title: string }) => dispatch(actions.addComponent({ title })),
@@ -88,18 +93,16 @@ const mapDispatchToProps = (dispatch: any) => ({
   appName: string;
   exportAppBool: boolean;
   storeConfig: StoreConfigInterface;
-  }) => {
-    return dispatch(
-      actions.createApplication({
-        path,
-        components,
-        genOption,
-        appName,
-        exportAppBool,
-        storeConfig,
-      }),
-    );
-  },
+  }) => dispatch(
+    actions.createApplication({
+      path,
+      components,
+      genOption,
+      appName,
+      exportAppBool,
+      storeConfig,
+    }),
+  ),
 });
 
 export class LeftContainer extends Component<PropsInt, StateInt> {
@@ -116,10 +119,31 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
     };
   }
 
+  chooseGenOptions = (genOption: number) => {
+    // set option
+    this.setState({ genOption });
+    // closeModal
+    this.closeModal();
+    // Choose app dir
+      const { components, storeConfig } = this.props;
+      // const { genOption } = this.state;
+      const appName = 'preducksApp';
+      const exportAppBool = true;
+      this.props.createApp({
+        path: '',
+        components,
+        genOption,
+        appName,
+        exportAppBool,
+        storeConfig,
+      });
+    
+  };
+
   handleChange = (event: any) => {
-    if(event.target.value.length < 18){
+    if (event.target.value.length < 18) {
       const newValue: string = event.target.value;
-      this.setState({componentName: newValue});
+      this.setState({ componentName: newValue });
     }
   };
 
@@ -139,7 +163,7 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
         closeModal: this.closeModal,
         secBtnLabel: 'clear workspace',
         open: true,
-        children: null, 
+        children: null,
         primBtnAction: null,
         primBtnLabel: null,
         secBtnAction: () => {
@@ -148,26 +172,6 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
         },
       }),
     });
-  };
-
-  chooseGenOptions = (genOption: number) => {
-    // set option
-    this.setState({ genOption });
-    // closeModal
-    this.closeModal();
-    // Choose app dir
-      const { components, storeConfig } = this.props;
-      // const { genOption } = this.state;
-      const appName = 'exported_preducks_app';
-      const exportAppBool = true;
-      this.props.createApp({
-        path: '',
-        components,
-        genOption,
-        appName,
-        exportAppBool,
-        storeConfig
-      });
   };
 
   showGenerateAppModal = () => {
@@ -208,99 +212,105 @@ export class LeftContainer extends Component<PropsInt, StateInt> {
         />
       ));
 
-    const addComponent = (<Grid
-      container
-      spacing={8}
-      alignItems="center"
-      direction="row"
-      justify="space-around">
-      <Grid item xs={8}>
-        <TextField
-          id="title-input"
-          label="add component"
-          placeholder="component name"
-          margin="normal"
-          autoFocus
-          onChange={this.handleChange}
-          onKeyPress={(ev) => {
-            if (ev.key === 'Enter') {
-              this.handleAddComponent();
-              ev.preventDefault();
-            }
-          }}
-          value={componentName}
-          name="componentName"
-          className={classes.light}
-          InputProps={{
-            className: classes.input,
-          }}
-          InputLabelProps={{
-            className: classes.input,
-          }}
-        />
+    const addComponent = (
+      <Grid container spacing={8} alignItems="center" direction="row" justify="space-around">
+        <Grid item xs={8}>
+          <TextField
+            id="title-input"
+            label="add component"
+            placeholder="component name"
+            margin="normal"
+            autoFocus
+            onChange={this.handleChange}
+            onKeyPress={(ev) => {
+              if (ev.key === 'Enter') {
+                this.handleAddComponent();
+                ev.preventDefault();
+              }
+            }}
+            value={componentName}
+            name="componentName"
+            className={classes.light}
+            InputProps={{
+              className: classes.input,
+            }}
+            InputLabelProps={{
+              className: classes.input,
+            }}
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <Fab
+            size="medium"
+            color="secondary"
+            className={classes.button}
+            aria-label="Add"
+            onClick={this.handleAddComponent}
+            disabled={!this.state.componentName}>
+            <AddIcon />
+          </Fab>
+        </Grid>
       </Grid>
-      <Grid item xs={4}>
-        <Fab
-          size="medium"
-          color="secondary"
-          className={classes.button}
-          aria-label="Add"
-          onClick={this.handleAddComponent}
-          disabled={!this.state.componentName}>
-          <AddIcon />
-        </Fab>
-      </Grid>
-    </Grid>);
+    );
 
-    const clearAndExportButtons = (<div
-      style={{
-        width: '100%',
-        alignSelf: 'flex-end'
-      }}>
+    const clearAndExportButtons = (
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
+          width: '100%',
+          alignSelf: 'flex-end',
         }}>
-        <Button
-          color="primary"
-          aria-label="Export Code"
-          variant="contained"
-          fullWidth
-          onClick={this.showGenerateAppModal}
-          className={classes.clearButton}
-          style={{ borderRadius: '10px', margin: '2px', color: 'black', backgroundColor: '#5CDB95' }}>
-          <GetAppIcon style={{ paddingRight: '5px' }} />
-          export project
-        </Button>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+          }}>
+          <Button
+            color="primary"
+            aria-label="Export Code"
+            variant="contained"
+            fullWidth
+            onClick={this.showGenerateAppModal}
+            className={classes.clearButton}
+            style={{
+              borderRadius: '10px',
+              margin: '2px',
+              color: 'black',
+              backgroundColor: '#5CDB95',
+            }}>
+            <GetAppIcon style={{ paddingRight: '5px' }} />
+            export project
+          </Button>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+          }}>
+          <Button
+            aria-label="Delete All"
+            variant="contained"
+            fullWidth
+            onClick={this.clearWorkspace}
+            className={classes.clearButton}
+            style={{
+              borderRadius: '10px',
+              margin: '2px',
+              color: 'white',
+              backgroundColor: '#F64C72',
+            }}>
+            clear workspace
+          </Button>
+        </div>
       </div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-        }}>
-        <Button
-          aria-label="Delete All"
-          variant="contained"
-          fullWidth
-          onClick={this.clearWorkspace}
-          className={classes.clearButton}
-          style={{  borderRadius: '10px', margin: '2px', color: 'white', backgroundColor: '#F64C72' }}>
-          clear workspace
-        </Button>
-      </div>
-    </div>);
+    );
 
     return (
       <div className="column left">
-          {addComponent}
-          <div className="expansionPanel">{leftColExpansionPanels}</div>
-        <HTMLComponentPanel
-            addChild={addChild}
-            focusComponent={focusComponent}
-            />
+        {addComponent}
+        <div className="expansionPanel">{leftColExpansionPanels}</div>
+        <HTMLComponentPanel addChild={addChild} focusComponent={focusComponent} />
         {clearAndExportButtons}
         {modal}
       </div>

@@ -6,7 +6,21 @@
 
 html {
   box-sizing: border-box;
+  background: #333;
   /* overflow: hidden; */
+}
+
+*::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 body {
@@ -25,6 +39,11 @@ body {
 #drag-bar {
   margin-bottom: -20px;
   height: 30px;
+  z-index: 10000;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  position: absolute;
   -webkit-app-region: drag;
 }
 
@@ -183,6 +202,7 @@ h1 {
   max-height: 99vh;
   background-color: #333333;
   overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .top-container {

@@ -686,6 +686,7 @@ div.rst__rowContents {
     width: 100%;
     /* margin: 5px;
      */
+    height: 50vh;
     padding: 10px;
   }
   #treeWrapper {
@@ -695,6 +696,7 @@ div.rst__rowContents {
   .left {
     padding: 10px 5px;
     width: 100%;
+    height: 50vh;
   }
   .expansionPanel {
     padding-right: 5px;

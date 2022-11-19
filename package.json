@@ -87,7 +87,7 @@
     "d3": "^5.9.7",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-saver": "^2.0.2",
-    "html-webpack-plugin": "^3.1.0",
+    "html-webpack-plugin": "^5.5.0",
     "is-electron": "^2.2.0",
     "jszip": "^3.2.2",
     "localforage": "^1.7.2",
@@ -103,7 +103,7 @@
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "webpack": "^4.35.2",
+    "webpack": "^4.36.1",
     "webpack-merge": "^4.2.1",
     "webpack-target-electron-renderer": "^0.4.0"
   },
@@ -140,7 +140,7 @@
     "jest": "^23.6.0",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.4",
-    "webpack-cli": "^3.3.5",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.7.2"
   }
 }
